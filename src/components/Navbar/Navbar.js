@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { Box } from "@chakra-ui/react";
+import { Box, IconButton } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import { colorPalette } from "../../styles/colors";
-import { HamburgerIcon } from "@chakra-ui/icons";
 import { breakpoints as mq } from "../../styles/media-queries";
 
 export const StyledNavbar = styled(Box)`
@@ -37,10 +36,14 @@ export const StyledNavLink = styled(NavLink)`
   }
 `;
 
-export const StyledBurgerIcon = styled(HamburgerIcon)`
-  display: none;
+export const StyledBurgerIcon = styled(IconButton)`
+  &.burger-icon{
+    display: none;
+  }
 
   @media (max-width: ${mq.tablet}){
+    &.burger-icon{
     display: block;
+  }
   }
 `;

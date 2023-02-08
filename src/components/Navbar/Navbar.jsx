@@ -1,7 +1,7 @@
 import { useColorMode } from '@chakra-ui/react';
 import React from 'react';
-import { StyledNavbar,StyledNavLink } from './Navbar.js';
-import { Button, IconButton } from '@chakra-ui/react';
+import { StyledNavbar,StyledNavLink, StyledBurgerIcon } from './Navbar.js';
+import { Button } from '@chakra-ui/react';
 import {CgLogIn} from 'react-icons/cg';
 import {FaUserPlus} from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,7 +20,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <IconButton icon={<HamburgerIcon w={5} h={5} />} aria-label='Cambiar Modo' onClick={()=>dispatch(toggleBurgerMenu())} />
+      <StyledBurgerIcon className="burger-icon" icon={<HamburgerIcon w={5} h={5} />} aria-label='Cambiar Modo' onClick={()=>dispatch(toggleBurgerMenu())} />
       <StyledNavbar as='nav' showBurgerMenu={showBurgerMenu}>
         <StyledNavLink colormode={colorMode} className={({ isActive }) => (isActive ? "active" : "")} to={'/'}>Inicio</StyledNavLink>
         <StyledNavLink colormode={colorMode} className={({ isActive }) => (isActive ? "active" : "")} to={'/productos'}>Productos</StyledNavLink>
