@@ -12,9 +12,9 @@ export const StyledLandingSection = styled(Box)`
 
 export const StyledHeroBox = styled(Box)`
   width: 95%;
-  max-width: 500px;
+  max-width: 1300px;
   display: grid;
-  gap: 20px;
+  gap: 10px;
   grid-auto-rows: min-content;
   justify-items: center;
   align-items: start;
