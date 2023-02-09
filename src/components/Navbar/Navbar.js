@@ -19,6 +19,7 @@ export const StyledNavbar = styled(Box)`
     width: 100%;
     grid-auto-flow: row;
     gap: 25px;
+    padding: 20px 10px;
   }
 
 `;

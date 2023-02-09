@@ -23,7 +23,7 @@ export const Navbar = () => {
   return (
     <>
       <StyledBurgerIcon className="burger-icon" icon={<HamburgerIcon w={5} h={5} />} aria-label='Cambiar Modo' onClick={()=>dispatch(toggleBurgerMenu())} />
-      <StyledNavbar as='nav' bgColor={useColorModeValue(colorPalette.light.primary,colorPalette.dark.primary)} showBurgerMenu={showBurgerMenu}>
+      <StyledNavbar as='nav' style={{backgroundColor:useColorModeValue(colorPalette.light.primary,colorPalette.dark.primary)}} showBurgerMenu={showBurgerMenu}>
         <StyledNavLink colormode={colorMode} className={({ isActive }) => (isActive ? "active" : "")} to={'/'}>Inicio</StyledNavLink>
         <StyledNavLink colormode={colorMode} className={({ isActive }) => (isActive ? "active" : "")} to={'/productos'}>Productos</StyledNavLink>
         <StyledNavLink colormode={colorMode} className={({ isActive }) => (isActive ? "active" : "")} to={'/contacto'}>Contacto</StyledNavLink>
