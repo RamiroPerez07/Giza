@@ -1,6 +1,5 @@
-import { Flex, Image, Icon, Box } from "@chakra-ui/react";
+import { Flex, Image, Box } from "@chakra-ui/react";
 import styled from "styled-components";
-import { colorPalette } from "../../styles/colors";
 
 
 

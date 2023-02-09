@@ -7,4 +7,8 @@ export const StyledHeader = styled(Box)`
   display: grid;
   align-items: start;
   justify-items: center;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
 `;

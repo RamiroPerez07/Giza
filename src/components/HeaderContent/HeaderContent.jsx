@@ -1,17 +1,18 @@
 import React from 'react';
-import { Spacer, useColorMode } from "@chakra-ui/react";
+import { Spacer, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import {BsCartFill} from 'react-icons/bs';
 import { StyledHeaderContent, StyledImg, StyledMenuOptions } from './HeaderContent';
 import {imgGiza} from "../../utils/parameters.js";
 import { Navbar } from '../Navbar/Navbar.jsx';
 import { IconButton} from '@chakra-ui/react';
 import {SunIcon, MoonIcon} from '@chakra-ui/icons';
+import { colorPalette } from '../../styles/colors';
 
 
 export const HeaderContent = () => {
   const {colorMode, toggleColorMode} = useColorMode()
   return (
-    <StyledHeaderContent>
+    <StyledHeaderContent bg={useColorModeValue(colorPalette.light.primary,colorPalette.dark.primary)}>
       <StyledImg src={imgGiza} alt="Giza" />
       <Spacer />
       <StyledMenuOptions>
