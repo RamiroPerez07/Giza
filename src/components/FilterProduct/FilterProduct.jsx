@@ -72,7 +72,7 @@ export const FilterProduct = (props) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3}>Guardar</Button>
+            <Button colorScheme={colorPalette.chakraScheme.button} mr={3}>Guardar</Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
