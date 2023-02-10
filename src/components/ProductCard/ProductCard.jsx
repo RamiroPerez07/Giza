@@ -2,32 +2,27 @@ import React from 'react';
 import { Card, Heading, Button, ButtonGroup, Divider, Stack, Text, CardFooter, Image, CardBody } from '@chakra-ui/react';
 import {BsFillCartFill} from 'react-icons/bs';
 import { colorPalette } from '../../styles/colors';
+import { useColorModeValue } from '@chakra-ui/react';
+import { StyledCardBody } from './ProductCard';
 
-export const ProductCard = () => {
+export const ProductCard = (product) => {
+  const {id, name, brand, shortDescription, description, price, stock, imgUrl, freeShipping} = product;
   return (
     <>
       <Card maxW='sm'>
-        <CardBody>
-          <Image
-            src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            alt='Green double couch with wooden legs'
-            borderRadius='lg'
-          />
+        <StyledCardBody>
+          <Image src={imgUrl} alt='Imagen del producto' borderRadius='lg' maxW="150px" maxH="150px" />
           <Stack mt='6' spacing='3'>
-            <Heading size='md'>Living room Sofa</Heading>
-            <Text>
-              This sofa is perfect for modern tropical spaces, baroque inspired
-              spaces, earthy toned spaces and for people who love a chic design with a
-              sprinkle of vintage design.
-            </Text>
-            <Text color={colorPalette.chakraScheme.button} fontSize='2xl' fontWeight="500">$450</Text>
+            <Heading size='md'>{name}</Heading>
+            <Text>{shortDescription}</Text>
+            <Text color={useColorModeValue(colorPalette.light.terciary,colorPalette.dark.terciary)} fontSize='2xl' fontWeight="500">$ {price}</Text>
           </Stack>
-        </CardBody>
+        </StyledCardBody>
         <Divider />
         <CardFooter>
           <ButtonGroup spacing='2'>
-            <Button leftIcon={<BsFillCartFill />} variant='solid' colorScheme='blue'>Agregar</Button>
-            <Button variant='ghost' colorScheme='blue'>Mas info</Button>
+            <Button leftIcon={<BsFillCartFill />} variant='solid' colorScheme={colorPalette.chakraScheme.button}>Agregar</Button>
+            <Button variant='ghost' colorScheme={colorPalette.chakraScheme.button}>Mas info</Button>
           </ButtonGroup>
         </CardFooter>
       </Card>

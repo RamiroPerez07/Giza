@@ -15,7 +15,7 @@ export const StyledNavbar = styled(Box)`
     position: fixed;
     top: 80px;
     left: ${(props)=> props.showBurgerMenu ? "0px" : "-100%"};
-    transition: left 0.5s linear;
+    transition: left 0.3s linear;
     width: 100%;
     grid-auto-flow: row;
     gap: 25px;

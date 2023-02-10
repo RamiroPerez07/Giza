@@ -7,7 +7,7 @@ export const colorPalette = {
   dark: {
     primary: "#1a202c",
     secondary: "#ffffff",
-    terciary: "#359594",
+    terciary: "#81e5d9",
   },
   chakraScheme: {
     bg: "teal",
