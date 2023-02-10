@@ -41,7 +41,7 @@ export const FilterProduct = (props) => {
           <ModalHeader>Filtrar Productos</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl>
+            <FormControl mb="20px">
               <FormLabel>Categoria</FormLabel>
               <Select ref={initialRef} placeholder='Seleccionar categoría' focusBorderColor={useColorModeValue(colorPalette.light.terciary, colorPalette.dark.terciary)}>
                 <option value='option1'>Perfumes</option>
@@ -50,7 +50,7 @@ export const FilterProduct = (props) => {
               </Select>
             </FormControl>
 
-            <FormControl>
+            <FormControl mb="20px">
               <FormLabel>Envío</FormLabel>
               <Select ref={initialRef} placeholder='Seleccionar opción' focusBorderColor={useColorModeValue(colorPalette.light.terciary, colorPalette.dark.terciary)}>
                 <option value='option1'>Gratuito</option>
@@ -58,7 +58,7 @@ export const FilterProduct = (props) => {
               </Select>
             </FormControl>
 
-            <FormControl mt={4}>
+            <FormControl mb="20px">
               <FormLabel>Precio</FormLabel>
               <Text mb="10px">{`Entre $${price.inf} y $${price.sup}`}</Text>
               <RangeSlider colorScheme={colorPalette.chakraScheme.button} aria-label={['min', 'max']} defaultValue={[0, 100000]} min={0} max={100000} step={5000} onChange={(value)=>setPrice({inf:value[0], sup:value[1]})}>
