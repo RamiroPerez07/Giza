@@ -21,15 +21,16 @@ export const Navbar = () => {
   //llamo a la funcion despachadora de acciones
   const dispatch = useDispatch();
 
-  //establezco una referencia
-  const node = useRef()
+  //establezco una referencia para el menu y para el boton
+  const node = useRef();
+  const nodeBtn = useRef();
 
   //con esta funcion (custom hook) agrego la funcionalidad de ocultarse con un evento especifico, en este caso click fuera del menu
-  useOnClickOutside(node, () => dispatch(toggleBurgerMenu()));
+  useOnClickOutside(node, nodeBtn, () => dispatch(toggleBurgerMenu()));
 
   return (
     <>
-      {<StyledBurgerIcon className="burger-icon" icon={!showBurgerMenu ? <HamburgerIcon w={5} h={5} /> : <CloseIcon w={3} h={3} />} aria-label='Abrir Menu' onClick={()=>dispatch(toggleBurgerMenu())} />}
+      <StyledBurgerIcon className="burger-icon" icon={!showBurgerMenu ? <HamburgerIcon w={5} h={5} /> : <CloseIcon w={3} h={3} />} aria-label='Abrir Menu' onClick={()=> dispatch(toggleBurgerMenu())} ref={nodeBtn} />
       <StyledNavbar as='nav' style={{backgroundColor:useColorModeValue(colorPalette.light.primary,colorPalette.dark.primary)}} showBurgerMenu={showBurgerMenu} onClick={()=>dispatch(toggleBurgerMenu())} ref={node}>
         <StyledNavLink colormode={colorMode} className={({ isActive }) => (isActive ? "active" : "")} to={'/'}>Inicio</StyledNavLink>
         <StyledNavLink colormode={colorMode} className={({ isActive }) => (isActive ? "active" : "")} to={'/productos'}>Productos</StyledNavLink>
