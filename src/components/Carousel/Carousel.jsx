@@ -54,7 +54,7 @@ export const Carousel = () => {
     return (
       <StyledContainer>
         <Flex w="full" pos="relative" overflow="hidden">
-          <Flex minH="200px" maxH="350px" w="full" {...carouselStyle}>
+          <Flex minH="200px" maxH="320px" w="full" {...carouselStyle}>
             {slides.map((slide, sid) => (
               <Box key={`slide-${sid}`} boxSize="full" shadow="md" flex="none" pos="relative">
                 <Image src={slide.img} alt="carousel image" boxSize="full" backgroundSize="cover" />
