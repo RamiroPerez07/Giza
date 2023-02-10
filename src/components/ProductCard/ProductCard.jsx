@@ -19,7 +19,7 @@ export const ProductCard = (product) => {
           </Stack>
         </StyledCardBody>
         <Divider />
-        <CardFooter>
+        <CardFooter display="grid" justifyItems="center">
           <ButtonGroup spacing='2'>
             <Button leftIcon={<BsFillCartFill />} variant='solid' colorScheme={colorPalette.chakraScheme.button}>Agregar</Button>
             <Button variant='ghost' colorScheme={colorPalette.chakraScheme.button}>Mas info</Button>
