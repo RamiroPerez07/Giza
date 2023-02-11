@@ -6,7 +6,9 @@ import { useSelector } from 'react-redux';
 export const ProductContainer = () => {
 
   //llamo al estado de los productos para renderizarlos
-  const products = useSelector(state => state.cart.products)
+  const products = useSelector(state => state.filterProducts.filterProducts);
+
+  console.log(products)
 
   return (
     <Grid w="full" maxW="1000px">

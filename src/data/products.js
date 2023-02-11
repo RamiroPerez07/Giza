@@ -9,6 +9,7 @@ export const productsData = [
     stock: 5,
     imgUrl: "https://res.cloudinary.com/dhnicvwkw/image/upload/v1673367235/Perfarm/products/bleu_de_chanel_g1hkqi.png",
     freeShipping: false,
+    category: "Perfumes",
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ export const productsData = [
     stock: 0,
     imgUrl: "https://res.cloudinary.com/dhnicvwkw/image/upload/v1673367237/Perfarm/products/mon-guerlain_mtrmqn.png",
     freeShipping: false,
+    category: "Perfumes",
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ export const productsData = [
     stock: 3,
     imgUrl: "https://res.cloudinary.com/dhnicvwkw/image/upload/v1673367238/Perfarm/products/shalimar_x4i28x.png",
     freeShipping: true,
+    category: "Perfumes",
   },
   {
     id: 4,
@@ -42,6 +45,7 @@ export const productsData = [
     stock: 4,
     imgUrl: "https://res.cloudinary.com/dhnicvwkw/image/upload/v1673367234/Perfarm/products/kaiak_oceano_kmassh.png",
     freeShipping: false,
+    category: "Perfumes",
   },
   {
     id: 5,
@@ -53,6 +57,7 @@ export const productsData = [
     stock: 2,
     imgUrl: "https://res.cloudinary.com/dhnicvwkw/image/upload/v1673367234/Perfarm/products/onemillion_xhamyc.png",
     freeShipping: true,
+    category: "Perfumes",
   },
   {
     id: 6,
@@ -64,6 +69,7 @@ export const productsData = [
     stock: 8,
     imgUrl: "https://res.cloudinary.com/dhnicvwkw/image/upload/v1673367233/Perfarm/products/acqua_di_colbert_mg0ymp.png",
     freeShipping: false,
+    category: "Perfumes",
   },
   {
     id: 7,
@@ -75,5 +81,6 @@ export const productsData = [
     stock: 12,
     imgUrl: "https://res.cloudinary.com/dhnicvwkw/image/upload/v1673367233/Perfarm/products/chester_ice_wg5lcb.png",
     freeShipping: false,
+    category: "Perfumes",
   },
 ]
