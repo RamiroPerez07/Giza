@@ -26,7 +26,7 @@ export const filterProductsReducer = (state = initialState, action) => {
         filterParameters : {...state.filterParameters,...action.payload},
       }
     case FILTER_PRODUCTS_TYPES.RESET_FILTER_PRODUCTS:
-      return {...initialState, name: state.filterParameters.name};
+      return {...initialState.filterParameters, name: state.filterParameters.name};
     default:
       return state;
   }
