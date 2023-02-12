@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { 
     Modal,
     ModalOverlay,
@@ -20,8 +20,8 @@ import {
 } from '@chakra-ui/react';
 import { colorPalette } from '../../styles/colors';
 import {categories} from '../../data/categories.js';
-import { filterProducts, resetFilterProducts } from '../../redux/actions/filter-products';
-import { useDispatch } from 'react-redux';
+import { filterProducts as filterBy, resetFilterProducts, updateFilterParameters } from '../../redux/actions/filter-products';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 export const FilterProduct = (props) => {
@@ -30,24 +30,15 @@ export const FilterProduct = (props) => {
 
   const {isOpen,onClose, initialRef, finalRef} = props;
 
-  //llamo al estado para el manejador de rango de precio
-  const [price, setPrice] = useState({inf: 0, sup: 100000});
-
-  const Parameters = {
-    category: undefined,
-    price: [0,100000],
-    shipping: undefined,
-  }
-
-  const [filterParameters, setFilterParameters] = useState(Parameters);
+  //llamo al estado de filtrado de productos
+  const {filterParameters} = useSelector(state => state.filterProducts)
 
   const handleFilter = () => {
-    dispatch(filterProducts(filterParameters));
+    dispatch(filterBy(filterParameters));
     onClose();
   }
 
   const handleResetFilter = () => {
-    setFilterParameters(Parameters);
     dispatch(resetFilterProducts());
     onClose();
   }
@@ -67,7 +58,7 @@ export const FilterProduct = (props) => {
           <ModalBody pb={6}>
             <FormControl mb="20px">
               <FormLabel>Categoria</FormLabel>
-              <Select value={filterParameters.category} onChange={(event)=>{setFilterParameters({...filterParameters,category: event.target.value})}} ref={initialRef} placeholder='Seleccionar categoría' focusBorderColor={useColorModeValue(colorPalette.light.terciary, colorPalette.dark.terciary)}>
+              <Select value={filterParameters.category} onChange={(event)=>{dispatch(updateFilterParameters({category: event.target.value}))}} ref={initialRef} placeholder='Seleccionar categoría' focusBorderColor={useColorModeValue(colorPalette.light.terciary, colorPalette.dark.terciary)}>
                 {
                   categories?.map(category => <option key={category} value={category}>{category}</option>)
                 }
@@ -76,7 +67,7 @@ export const FilterProduct = (props) => {
 
             <FormControl mb="20px">
               <FormLabel>Envío</FormLabel>
-              <Select value={filterParameters.shipping} onChange={(event)=>{setFilterParameters({...filterParameters,shipping: event.target.value})}} ref={initialRef} placeholder='Seleccionar opción' focusBorderColor={useColorModeValue(colorPalette.light.terciary, colorPalette.dark.terciary)}>
+              <Select value={filterParameters.shipping} onChange={(event)=>{dispatch(updateFilterParameters({shipping: event.target.value}))}} ref={initialRef} placeholder='Seleccionar opción' focusBorderColor={useColorModeValue(colorPalette.light.terciary, colorPalette.dark.terciary)}>
                 <option value="true">Gratuito</option>
                 <option value="false">Envío con cargo</option>
               </Select>
@@ -84,8 +75,8 @@ export const FilterProduct = (props) => {
 
             <FormControl mb="20px">
               <FormLabel>Precio</FormLabel>
-              <Text mb="10px">{`Entre $${price.inf} y $${price.sup}`}</Text>
-              <RangeSlider value={[filterParameters.price[0],filterParameters.price[1]]} colorScheme={colorPalette.chakraScheme.button} aria-label={['min', 'max']} defaultValue={[0, 100000]} min={0} max={100000} step={5000} onChange={(value)=>{setPrice({inf:value[0], sup:value[1]}); setFilterParameters({...filterParameters,price: [value[0], value[1]]})}}>
+              <Text mb="10px">{`Entre $${filterParameters.price[0]} y $${filterParameters.price[1]}`}</Text>
+              <RangeSlider value={filterParameters.price}  colorScheme={colorPalette.chakraScheme.button} aria-label={['min', 'max']} defaultValue={[0, 100000]} min={0} max={100000} step={5000} onChange={(value)=>{dispatch(updateFilterParameters({price: [value[0], value[1]]}))}}>
                 <RangeSliderTrack>
                   <RangeSliderFilledTrack />
                 </RangeSliderTrack>

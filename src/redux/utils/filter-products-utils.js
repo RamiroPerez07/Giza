@@ -11,8 +11,14 @@ const filterProductsByShipping = (products, shipping) => {
 }
 
 
+const filterProductsByName = (products, name) => {
+  return name ? products.filter(product => product.name.toString().trim().toLowerCase().includes(name.toString().trim().toLowerCase())) : products;
+}
+
+
 export const filterProducts = (products, filterParameters) => {
   let listOfProducts = [...products];
+  listOfProducts = filterProductsByName(listOfProducts,filterParameters.name);
   listOfProducts = filterProductsByCategory(listOfProducts, filterParameters.category);
   listOfProducts = filterProductsBetweenTwoPrices(listOfProducts, filterParameters.price);
   listOfProducts = filterProductsByShipping(listOfProducts, filterParameters.shipping);

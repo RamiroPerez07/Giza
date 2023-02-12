@@ -7,6 +7,13 @@ export const filterProducts = (filterParameters) => {
   }
 }
 
+export const updateFilterParameters = (filterParameters) => {
+  return {
+    type: FILTER_PRODUCTS_TYPES.SET_FILTER_PARAMETERS,
+    payload: filterParameters,
+  }
+}
+
 export const resetFilterProducts = () => {
   return {
     type: FILTER_PRODUCTS_TYPES.RESET_FILTER_PRODUCTS,
