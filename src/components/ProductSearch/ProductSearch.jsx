@@ -2,12 +2,13 @@ import React from 'react';
 import { Box, Stack, InputLeftElement, Input, InputGroup, Button } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { colorPalette } from '../../styles/colors';
-import {FaFilter} from 'react-icons/fa';
+import { FaFilter} from 'react-icons/fa';
 import { useRef } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import { FilterProduct } from '../FilterProduct/FilterProduct.jsx';
 import { filterProducts, updateFilterParameters } from '../../redux/actions/filter-products';
 import { useDispatch, useSelector } from 'react-redux';
+import { useColorModeValue } from '@chakra-ui/react';
 
 export const ProductSearch = () => {
 
@@ -22,13 +23,20 @@ export const ProductSearch = () => {
   const finalRef = useRef(null)
 
   //llamo al estado de filtrado de productos
-  const {filterParameters} = useSelector(state => state.filterProducts)
+  const {active,filterParameters} = useSelector(state => state.filterProducts)
 
   const handleFilter = e => {
     e.preventDefault();
     dispatch(filterProducts(filterParameters));
     onClose();
   }
+
+  const setFilterParameters = (event) => {
+    dispatch(updateFilterParameters({name: event.target.value}))
+  }
+
+  const emptyFilterStyle = {color: useColorModeValue(colorPalette.light.secondary, colorPalette.dark.secondary)}
+  const fillFilterStyle = {color: useColorModeValue(colorPalette.light.terciary,  colorPalette.dark.terciary)}
 
   return (
     <Box w="95%" maxW="500px" mb="25px">
@@ -39,9 +47,9 @@ export const ProductSearch = () => {
             children={<SearchIcon aria-label="Buscar producto" />}
             color={colorPalette.chakraScheme.button}
           />
-          <Input onChange={(event)=> dispatch(updateFilterParameters({name: event.target.value}))} type='text' placeholder='Buscar producto' focusBorderColor={colorPalette.light.terciary} ref={finalRef} />
+          <Input onChange={(event)=> setFilterParameters(event)} type='text' placeholder='Buscar producto' focusBorderColor={colorPalette.light.terciary} ref={finalRef} />
         </InputGroup>
-        <Button leftIcon={<FaFilter />} variant='outline' onClick={onOpen}>Filtro</Button>
+        <Button leftIcon={<FaFilter style={active?fillFilterStyle:emptyFilterStyle} />} variant='outline' onClick={onOpen}>Filtro</Button>
       </Stack>
       <FilterProduct isOpen={isOpen} onClose={onClose} initialRef={initialRef} finalRef={finalRef} />
     </Box>

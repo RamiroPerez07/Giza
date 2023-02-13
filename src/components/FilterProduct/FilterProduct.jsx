@@ -40,6 +40,7 @@ export const FilterProduct = (props) => {
 
   const handleResetFilter = () => {
     dispatch(resetFilterProducts());
+    dispatch(filterBy(filterParameters));
     onClose();
   }
 
@@ -52,10 +53,11 @@ export const FilterProduct = (props) => {
         onClose={onClose}
       >
         <ModalOverlay />
-        <ModalContent w="95%">
+        <ModalContent w="95%" justifyContent="center">
           <ModalHeader>Filtrar Productos</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
+
             <FormControl mb="20px">
               <FormLabel>Categoria</FormLabel>
               <Select value={filterParameters.category} onChange={(event)=>{dispatch(updateFilterParameters({category: event.target.value}))}} ref={initialRef} placeholder='Seleccionar categoría' focusBorderColor={useColorModeValue(colorPalette.light.terciary, colorPalette.dark.terciary)}>
@@ -76,7 +78,7 @@ export const FilterProduct = (props) => {
             <FormControl mb="20px">
               <FormLabel>Precio</FormLabel>
               <Text mb="10px">{`Entre $${filterParameters.price[0]} y $${filterParameters.price[1]}`}</Text>
-              <RangeSlider value={filterParameters.price}  colorScheme={colorPalette.chakraScheme.button} aria-label={['min', 'max']} defaultValue={[0, 100000]} min={0} max={100000} step={5000} onChange={(value)=>{dispatch(updateFilterParameters({price: [value[0], value[1]]}))}}>
+              <RangeSlider value={filterParameters.price}  colorScheme={colorPalette.chakraScheme.button} aria-label={['min', 'max']} min={0} max={100000} step={5000} onChange={(value)=>{dispatch(updateFilterParameters({price: [value[0], value[1]]}))}}>
                 <RangeSliderTrack>
                   <RangeSliderFilledTrack />
                 </RangeSliderTrack>
@@ -86,9 +88,9 @@ export const FilterProduct = (props) => {
             </FormControl>
           </ModalBody>
 
-          <ModalFooter>
-            <Button colorScheme={colorPalette.chakraScheme.button} mr={3} onClick={handleFilter}>Filtrar</Button>
-            <Button onClick={handleResetFilter} mr={3}>Borrar Filtro</Button>
+          <ModalFooter display="grid" gridGap="10px" gridAutoFlow="column" justifyContent="center">
+            <Button colorScheme={colorPalette.chakraScheme.button} onClick={handleFilter}>Filtrar</Button>
+            <Button onClick={handleResetFilter}>Borrar</Button>
             <Button onClick={onClose}>Cancelar</Button>
           </ModalFooter>
         </ModalContent>

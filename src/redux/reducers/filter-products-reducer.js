@@ -1,16 +1,17 @@
 import { productsData } from '../../data/products.js';
 import { FILTER_PRODUCTS_TYPES } from '../types/types';
-import {filterProducts} from '../utils/filter-products-utils.js';
+import {filterProducts, isFilterActive} from '../utils/filter-products-utils.js';
 
 const initialState = {
   products: productsData,
   filterParameters: {
-    name: undefined,
-    category: undefined,
+    name: "",
+    category: "",
     price: [0,100000],
-    shipping: undefined,
+    shipping: "",
   },
   filterProducts: productsData,
+  active: false,
 }
 
 export const filterProductsReducer = (state = initialState, action) => {
@@ -19,6 +20,7 @@ export const filterProductsReducer = (state = initialState, action) => {
       return {
         ...state,
         filterProducts: filterProducts(state.products,state.filterParameters),
+        active: isFilterActive(initialState.filterParameters, state.filterParameters),
       };
     case FILTER_PRODUCTS_TYPES.SET_FILTER_PARAMETERS:
       return {
@@ -26,7 +28,10 @@ export const filterProductsReducer = (state = initialState, action) => {
         filterParameters : {...state.filterParameters,...action.payload},
       }
     case FILTER_PRODUCTS_TYPES.RESET_FILTER_PRODUCTS:
-      return {...initialState.filterParameters, name: state.filterParameters.name};
+      return {
+        ...state,
+        filterParameters: {...initialState.filterParameters, name: state.filterParameters.name},
+    };
     default:
       return state;
   }
