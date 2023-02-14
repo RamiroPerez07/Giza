@@ -13,3 +13,16 @@ export const decreaseProductFromCart = (product) => {
     payload: product,
   };
 };
+
+export const removeProductFromCart = (product) => {
+  return {
+    type: CART_TYPES.REMOVE_PRODUCT_FROM_CART,
+    payload: product,
+  }
+}
+
+export const removeAllProductsFromCart = () => {
+  return {
+    type: CART_TYPES.REMOVE_ALL_PRODUCTS_FROM_CART,
+  }
+}

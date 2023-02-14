@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton,Card, Image, Stack, CardBody, Heading, Text, CardFooter, Button } from '@chakra-ui/react';
-import { addProductToCart, decreaseProductFromCart } from '../../redux/actions/cart-actions';
+import { addProductToCart, decreaseProductFromCart, removeProductFromCart } from '../../redux/actions/cart-actions';
 import { useDispatch } from 'react-redux';
 import { colorPalette } from '../../styles/colors.js';
 import { DeleteIcon } from '@chakra-ui/icons';
@@ -28,6 +28,7 @@ export const CartProductCard = (product) => {
           size="xs"
           fontSize='12px'
           variant="ghost"
+          onClick={()=>dispatch(removeProductFromCart(product))}
         />
         
         <Image

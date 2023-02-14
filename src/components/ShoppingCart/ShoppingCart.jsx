@@ -1,8 +1,9 @@
 import React from 'react';
 import { Container, Divider, SimpleGrid, Text } from '@chakra-ui/react';
 import { Drawer, DrawerOverlay, DrawerCloseButton, DrawerHeader, DrawerContent, DrawerBody, Button, DrawerFooter } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CartProductCard } from '../CartProductCard/CartProductCard.jsx';
+import { removeAllProductsFromCart } from '../../redux/actions/cart-actions.js';
 
 export const ShoppingCart = (props) => {
   //desestructuro las propiedades de administrador de visibilidad del carro
@@ -10,6 +11,8 @@ export const ShoppingCart = (props) => {
 
   //llamo al estado de productos en el carro
   const {productsCart} = useSelector(state => state.cart);
+
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -46,10 +49,9 @@ export const ShoppingCart = (props) => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Save</Button>
+            <Button colorScheme='blue' mr={3}>Confirmar</Button>
+            <Button variant='outline' mr={3} onClick={() => dispatch(removeAllProductsFromCart())}>Eliminar todos</Button>
+            <Button variant='outline' mr={3} onClick={onClose}>Salir</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

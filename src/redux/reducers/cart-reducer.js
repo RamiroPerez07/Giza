@@ -1,6 +1,6 @@
 import { CART_TYPES } from "../types/types";
 import {productsData} from '../../data/products.js';
-import {addProductToCart, decreaseProductFromCart} from '../utils/cart-utils.js';
+import {addProductToCart, decreaseProductFromCart, removeAllProductsFromCart, removeProductFromCart} from '../utils/cart-utils.js';
 
 
 const initial_state = {
@@ -19,6 +19,16 @@ export const cartReducer = (state=initial_state,action) => {
       return {
         ...state,
         productsCart: decreaseProductFromCart(action.payload, state.productsCart)
+      }
+    case CART_TYPES.REMOVE_PRODUCT_FROM_CART:
+      return {
+        ...state,
+        productsCart: removeProductFromCart(action.payload, state.productsCart),
+      }
+    case CART_TYPES.REMOVE_ALL_PRODUCTS_FROM_CART:
+      return {
+        ...state,
+        productsCart: removeAllProductsFromCart(),
       }
     default:
       return state;

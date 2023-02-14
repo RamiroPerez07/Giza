@@ -8,7 +8,7 @@ export const addProductToCart = (product, cartProducts) => {
 
 export const decreaseProductFromCart = (product, cartProducts) => {
   if (product.quantity === 1) {
-    return cartProducts.filter(cartProduct => cartProduct.id !== product.id)
+    return removeProductFromCart(product, cartProducts);
   } else {
     return cartProducts.map(cartProduct => {
       return (cartProduct.id === product.id) ? 
@@ -17,3 +17,11 @@ export const decreaseProductFromCart = (product, cartProducts) => {
     })
   }
 };
+
+export const removeProductFromCart = (product,cartProducts) => {
+  return cartProducts.filter(cartProduct => cartProduct.id !== product.id)
+}
+
+export const removeAllProductsFromCart = () => {
+  return [];
+}
