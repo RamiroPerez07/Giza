@@ -1,5 +1,5 @@
 import React from 'react';
-import { SimpleGrid, Stack } from '@chakra-ui/react';
+import { Container, Divider, SimpleGrid, Text } from '@chakra-ui/react';
 import { Drawer, DrawerOverlay, DrawerCloseButton, DrawerHeader, DrawerContent, DrawerBody, Button, DrawerFooter } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { CartProductCard } from '../CartProductCard/CartProductCard.jsx';
@@ -9,7 +9,7 @@ export const ShoppingCart = (props) => {
   const {isOpen, onClose, btnRef} = props;
 
   //llamo al estado de productos en el carro
-  const {productsCard} = useSelector(state => state.cart);
+  const {productsCart} = useSelector(state => state.cart);
 
   return (
     <>
@@ -21,17 +21,28 @@ export const ShoppingCart = (props) => {
         size="sm"
       >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent top="80px !important">
           <DrawerCloseButton />
           <DrawerHeader>Tus productos en carrito</DrawerHeader>
 
           <DrawerBody>
-            <Stack spacing={3} minH="200px">
-              <CartProductCard />
+            <Container mb="20px" p="5px" display="grid" gap="10px" gridAutoRows="min-content" h="350px" overflowY="scroll" centerContent>
               {
-                productsCard?.map(product => <CartProductCard key={product.id} {...product} />)
+                productsCart?.map(product => <CartProductCard key={product.id} {...product} />)
               }
-            </Stack>
+            </Container>
+            <Divider />
+            <SimpleGrid columns={2} spacing="10px">
+              <Text>Subtotal</Text>
+              <Text>$1500</Text>
+              <Text>Envio</Text>
+              <Text>$3200</Text>
+            </SimpleGrid>
+            <Divider />
+            <SimpleGrid columns={2} spacing="10px">
+              <Text>Total</Text>
+              <Text>$4700</Text>
+            </SimpleGrid>
           </DrawerBody>
 
           <DrawerFooter>

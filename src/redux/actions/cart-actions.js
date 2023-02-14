@@ -6,3 +6,10 @@ export const addProductToCart = (product) => {
     payload: product,
   };
 };
+
+export const decreaseProductFromCart = (product) => {
+  return {
+    type: CART_TYPES.DECREASE_PRODUCT_FROM_CART,
+    payload: product,
+  };
+};

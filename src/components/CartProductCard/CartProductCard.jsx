@@ -1,39 +1,43 @@
 import React from 'react';
 import { Card, Image, Stack, CardBody, Heading, Text, CardFooter, Button } from '@chakra-ui/react';
+import { addProductToCart, decreaseProductFromCart } from '../../redux/actions/cart-actions';
+import { useDispatch } from 'react-redux';
 
-export const CartProductCard = (props) => {
-  console.log(props.id)
+export const CartProductCard = (product) => {
+  const {name, shortDescription, imgUrl, quantity} = product;
+
+  const dispatch = useDispatch();
+
   return (
     <>
       <Card
-        direction={{ base: 'column', sm: 'row' }}
+        direction= "row"
         overflow='hidden'
         variant='outline'
         h="auto"
-        minH="150px"
       >
         <Image
-          objectFit='cover'
-          maxW={{ base: '95%', sm: '100px' }}
-          src='https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60'
-          alt='Caffe Latte'
+          objectFit='contain'
+          w= "80px"
+          src= {imgUrl}
+          alt='Imagen del producto'
+          padding="7px"
         />
 
         <Stack>
-          <CardBody pb="5px">
-            <Heading as="h3" size='xs'>The perfect latte</Heading>
+          <CardBody p="7px 7px 0px 7px">
+            <Heading as="h3" size='xs'>{name}</Heading>
 
             <Text py='2' fontSize="xs">
-              Caffè latte is a coffee beverage of Italian origin made with espresso
-              and steamed milk.
+              {shortDescription}
             </Text>
           </CardBody>
 
-          <CardFooter pt="0px" alignItems="center">
+          <CardFooter mt="0px !important" p="0px 7px 7px 7px" alignItems="center">
             <Text fontSize="xs" mr="10px">Cantidad</Text>
-            <Button variant='solid' colorScheme='blue' size="xs" mr="10px">-</Button>
-            <Text fontSize="xs" fontWeight="bold" mr="10px" minW="15px" align="center">10</Text>
-            <Button variant='solid' colorScheme='blue' size="xs">+</Button>
+            <Button onClick={()=> dispatch(decreaseProductFromCart(product))} variant='solid' colorScheme='blue' size="xs" mr="10px">-</Button>
+            <Text fontSize="xs" fontWeight="bold" mr="10px" minW="15px" align="center">{quantity}</Text>
+            <Button onClick={() => dispatch(addProductToCart(product))} variant='solid' colorScheme='blue' size="xs">+</Button>
           </CardFooter>
         </Stack>
       </Card>

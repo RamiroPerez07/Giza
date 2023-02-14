@@ -1,9 +1,19 @@
 export const addProductToCart = (product, cartProducts) => {
-  let updatedProducts;
-  if (cartProducts.some(cartProduct => cartProduct.id === product.id)){
-    updatedProducts = [...cartProducts, {...product, quantity: product.quantity + 1}]
-  }else{
-    updatedProducts = [...cartProducts, {...product, quantity: 1}]
+  const existingProduct = cartProducts.find(cartProduct => cartProduct.id === product.id)
+  if (existingProduct){
+    return cartProducts.map(cartProduct => cartProduct.id === existingProduct.id ? {...cartProduct, quantity: cartProduct.quantity + 1} : cartProduct)
   }
-  return updatedProducts;
-}
+  return [...cartProducts, {...product, quantity: 1}]
+};
+
+export const decreaseProductFromCart = (product, cartProducts) => {
+  if (product.quantity === 1) {
+    return cartProducts.filter(cartProduct => cartProduct.id !== product.id)
+  } else {
+    return cartProducts.map(cartProduct => {
+      return (cartProduct.id === product.id) ? 
+      {...cartProduct, quantity: cartProduct.quantity - 1} :
+      cartProduct;
+    })
+  }
+};
