@@ -1,7 +1,9 @@
 import React from 'react';
-import { Card, Image, Stack, CardBody, Heading, Text, CardFooter, Button } from '@chakra-ui/react';
+import { IconButton,Card, Image, Stack, CardBody, Heading, Text, CardFooter, Button } from '@chakra-ui/react';
 import { addProductToCart, decreaseProductFromCart } from '../../redux/actions/cart-actions';
 import { useDispatch } from 'react-redux';
+import { colorPalette } from '../../styles/colors.js';
+import { DeleteIcon } from '@chakra-ui/icons';
 
 export const CartProductCard = (product) => {
   const {name, shortDescription, imgUrl, quantity} = product;
@@ -16,6 +18,18 @@ export const CartProductCard = (product) => {
         variant='outline'
         h="auto"
       >
+        <IconButton
+          colorScheme={colorPalette.chakraScheme.button}
+          aria-label='Eliminar producto de carrito'
+          icon={<DeleteIcon />}
+          position="absolute"
+          right="5px"
+          top="5px"
+          size="xs"
+          fontSize='12px'
+          variant="ghost"
+        />
+        
         <Image
           objectFit='contain'
           w= "80px"

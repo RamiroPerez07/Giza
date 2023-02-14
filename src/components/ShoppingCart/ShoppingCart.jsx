@@ -26,22 +26,22 @@ export const ShoppingCart = (props) => {
           <DrawerHeader>Tus productos en carrito</DrawerHeader>
 
           <DrawerBody>
-            <Container mb="20px" p="5px" display="grid" gap="10px" gridAutoRows="min-content" h="350px" overflowY="scroll" centerContent>
+            <Container mb="20px" p="5px" display="grid" gap="10px" gridAutoRows="min-content" h="250px" overflowY="scroll" centerContent>
               {
                 productsCart?.map(product => <CartProductCard key={product.id} {...product} />)
               }
             </Container>
             <Divider />
-            <SimpleGrid columns={2} spacing="10px">
-              <Text>Subtotal</Text>
-              <Text>$1500</Text>
-              <Text>Envio</Text>
-              <Text>$3200</Text>
+            <SimpleGrid columns={2} spacing="10px" p="10px">
+              <Text fontSize="md" fontWeight="bold">Subtotal</Text>
+              <Text fontSize="md" justifySelf="end">$1500</Text>
+              <Text fontSize="md" fontWeight="bold">Envio</Text>
+              <Text fontSize="md" justifySelf="end">$3200</Text>
             </SimpleGrid>
             <Divider />
-            <SimpleGrid columns={2} spacing="10px">
-              <Text>Total</Text>
-              <Text>$4700</Text>
+            <SimpleGrid columns={2} spacing="10px" p="10px">
+              <Text fontSize="md" fontWeight="bold">Total</Text>
+              <Text fontSize="md" justifySelf="end">$4700</Text>
             </SimpleGrid>
           </DrawerBody>
 

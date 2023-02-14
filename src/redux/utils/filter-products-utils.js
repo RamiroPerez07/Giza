@@ -27,14 +27,16 @@ export const filterProducts = (products, filterParameters) => {
 
 export const isFilterActive = (initialFilterParameters, currentFilterParameters) => {
   console.log("initial",initialFilterParameters,"current", currentFilterParameters);
-  console.log("test-equal",(
-    initialFilterParameters.category !== currentFilterParameters.category ||
-    initialFilterParameters.shipping !== currentFilterParameters.shipping ||
-    initialFilterParameters.price !== currentFilterParameters.price
-  ))
+  console.log("test-equal",[
+    !(initialFilterParameters.category === currentFilterParameters.category) ,
+    !(initialFilterParameters.shipping === currentFilterParameters.shipping) ,
+    !(initialFilterParameters.price[0] === currentFilterParameters.price[0]) ,
+    !(initialFilterParameters.price[1] === currentFilterParameters.price[1])
+  ])
   return (
-    initialFilterParameters.category !== currentFilterParameters.category ||
-    initialFilterParameters.shipping !== currentFilterParameters.shipping ||
-    initialFilterParameters.price !== currentFilterParameters.price
+    !(initialFilterParameters.category === currentFilterParameters.category) ||
+    !(initialFilterParameters.shipping === currentFilterParameters.shipping) ||
+    !(initialFilterParameters.price[0] === currentFilterParameters.price[0]) ||
+    !(initialFilterParameters.price[1] === currentFilterParameters.price[1])
   );
 }

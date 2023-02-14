@@ -78,7 +78,7 @@ export const FilterProduct = (props) => {
             <FormControl mb="20px">
               <FormLabel>Precio</FormLabel>
               <Text mb="10px">{`Entre $${filterParameters.price[0]} y $${filterParameters.price[1]}`}</Text>
-              <RangeSlider value={filterParameters.price}  colorScheme={colorPalette.chakraScheme.button} aria-label={['min', 'max']} min={0} max={100000} step={5000} onChange={(value)=>{dispatch(updateFilterParameters({price: [value[0], value[1]]}))}}>
+              <RangeSlider value={filterParameters.price}  colorScheme={colorPalette.chakraScheme.button} min={0} max={100000} step={5000} onChange={(value)=>{dispatch(updateFilterParameters({price: [value[0], value[1]]}))}}>
                 <RangeSliderTrack>
                   <RangeSliderFilledTrack />
                 </RangeSliderTrack>
