@@ -17,7 +17,7 @@ export const ProductCard = (product) => {
     <>
       <Card maxW='sm'>
         <StyledCardBody>
-          <Image src={imgUrl} alt='Imagen del producto' borderRadius='lg' maxW="150px" maxH="150px" />
+          <Image src={imgUrl} alt='Imagen del producto' borderRadius='lg' w="120px" h="120px" objectFit="contain" />
           <Stack mt='6' spacing='3'>
             <Heading size='md'>{name}</Heading>
             <Text>{shortDescription}</Text>

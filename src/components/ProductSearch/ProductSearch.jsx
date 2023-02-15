@@ -32,7 +32,7 @@ export const ProductSearch = () => {
 
 
   //llamo al estado de filtrado de productos
-  const {active,filterParameters} = useSelector(state => state.filterProducts)
+  const {sortActive, filterActive,filterParameters} = useSelector(state => state.filterProducts)
 
   const handleFilter = e => {
     e.preventDefault();
@@ -58,8 +58,8 @@ export const ProductSearch = () => {
           />
           <Input onChange={(event)=> setFilterParameters(event)} type='text' placeholder='Buscar producto' focusBorderColor={colorPalette.light.terciary} ref={finalRef} />
         </InputGroup>
-        <Button leftIcon={<FaFilter style={active?fillFilterStyle:emptyFilterStyle} />} variant='outline' onClick={onFilterFrameOpen}>Filtro</Button>
-        <IconButton aria-label='Ordenar según' icon={<AiOutlineSortAscending />} variant="outline" fontSize="x-large" onClick={OnSortFrameOpen} />
+        <Button leftIcon={<FaFilter style={filterActive?fillFilterStyle:emptyFilterStyle} />} variant='outline' onClick={onFilterFrameOpen}>Filtro</Button>
+        <IconButton aria-label='Ordenar según' icon={<AiOutlineSortAscending style={sortActive?fillFilterStyle:emptyFilterStyle} />} variant="outline" fontSize="x-large" onClick={OnSortFrameOpen} />
       </Stack>
       <FilterProduct isOpen={isFilterFrameOpen} onClose={OnFilterFrameClose} initialRef={initialRef} finalRef={finalRef} />
       <SortProduct isOpen={isSortFrameOpen} onClose={OnSortFrameClose} initialRef={initialSortRef} finalRef={finalRef} />

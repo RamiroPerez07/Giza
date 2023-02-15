@@ -10,17 +10,12 @@ import {
     Button,
     FormLabel,
     ModalCloseButton,
-    Select,
-    RangeSlider,
-    RangeSliderTrack,
-    RangeSliderThumb,
-    RangeSliderFilledTrack, 
-    Text,
-    useColorModeValue,
+    Radio,
+    RadioGroup,
+    Stack,
 } from '@chakra-ui/react';
 import { colorPalette } from '../../styles/colors';
-import {categories} from '../../data/categories.js';
-import { filterProducts as filterBy, resetFilterProducts, updateFilterParameters } from '../../redux/actions/filter-products';
+import { filterProducts as filterBy, resetSortParameters, updateFilterParameters } from '../../redux/actions/filter-products';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -39,7 +34,7 @@ export const SortProduct = (props) => {
   }
 
   const handleResetFilter = () => {
-    dispatch(resetFilterProducts());
+    dispatch(resetSortParameters());
     dispatch(filterBy(filterParameters));
     onClose();
   }
@@ -58,38 +53,32 @@ export const SortProduct = (props) => {
           <ModalCloseButton />
           <ModalBody pb={6}>
 
-            <FormControl mb="20px">
-              <FormLabel>Categoria</FormLabel>
-              <Select value={filterParameters.category} onChange={(event)=>{dispatch(updateFilterParameters({category: event.target.value}))}} ref={initialRef} placeholder='Seleccionar categoría' focusBorderColor={useColorModeValue(colorPalette.light.terciary, colorPalette.dark.terciary)}>
-                {
-                  categories?.map(category => <option key={category} value={category}>{category}</option>)
-                }
-              </Select>
-            </FormControl>
+          <FormControl mb="20px">
+            <FormLabel>Por nombre</FormLabel>
+            <RadioGroup defaultValue='name-undefined' name="name-sort" onChange={(value)=>dispatch(updateFilterParameters({sortByName: value}))} value={filterParameters.sortByName}>
+              <Stack>
+                <Radio value='name-undefined' size="sm">Sin Orden</Radio>
+                <Radio value='name-az' size="sm">Ascendente [A-Z]</Radio>
+                <Radio value='name-za' size="sm">Descendente [Z-A]</Radio>
+              </Stack>
+            </RadioGroup>
+          </FormControl>
 
-            <FormControl mb="20px">
-              <FormLabel>Envío</FormLabel>
-              <Select value={filterParameters.shipping} onChange={(event)=>{dispatch(updateFilterParameters({shipping: event.target.value}))}} ref={initialRef} placeholder='Seleccionar opción' focusBorderColor={useColorModeValue(colorPalette.light.terciary, colorPalette.dark.terciary)}>
-                <option value="true">Gratuito</option>
-                <option value="false">Envío con cargo</option>
-              </Select>
-            </FormControl>
+          <FormControl mb="20px">
+            <FormLabel>Por precio</FormLabel>
+            <RadioGroup defaultValue='price-undefined' name="price-sort" onChange={(value)=>dispatch(updateFilterParameters({sortByPrice: value}))} value={filterParameters.sortByPrice}>
+              <Stack>
+                <Radio value='price-undefined' size="sm">Sin Orden</Radio>
+                <Radio value='price-19' size="sm">Ascendente [1-9]</Radio>
+                <Radio value='price-91' size="sm">Descendente [9-1]</Radio>
+              </Stack>
+            </RadioGroup>
+          </FormControl>
 
-            <FormControl mb="20px">
-              <FormLabel>Precio</FormLabel>
-              <Text mb="10px">{`Entre $${filterParameters.price[0]} y $${filterParameters.price[1]}`}</Text>
-              <RangeSlider value={filterParameters.price}  colorScheme={colorPalette.chakraScheme.button} min={0} max={100000} step={5000} onChange={(value)=>{dispatch(updateFilterParameters({price: [value[0], value[1]]}))}}>
-                <RangeSliderTrack>
-                  <RangeSliderFilledTrack />
-                </RangeSliderTrack>
-                <RangeSliderThumb index={0} borderColor={useColorModeValue(colorPalette.light.terciary, colorPalette.dark.secondary)} />
-                <RangeSliderThumb index={1} borderColor={useColorModeValue(colorPalette.light.terciary, colorPalette.dark.secondary)} />
-              </RangeSlider>
-            </FormControl>
           </ModalBody>
 
           <ModalFooter display="grid" gridGap="10px" gridAutoFlow="column" justifyContent="center">
-            <Button colorScheme={colorPalette.chakraScheme.button} onClick={handleFilter}>Filtrar</Button>
+            <Button colorScheme={colorPalette.chakraScheme.button} onClick={handleFilter}>Ordenar</Button>
             <Button onClick={handleResetFilter}>Borrar</Button>
             <Button onClick={onClose}>Cancelar</Button>
           </ModalFooter>
