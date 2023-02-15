@@ -16,7 +16,7 @@ export const ProductContainer = () => {
         {
           products.length !== 0 ?
           products.map(product => <ProductCard key={product.id} {...product}></ProductCard>) : 
-          <InfoAlert text="No se encontraron coincidencias según los filtros solicitados, ¡intentá con otros parametros de búsqueda!" />}
+          <InfoAlert text="No se encontraron coincidencias según los filtros solicitados, ¡intentá con otros parámetros de búsqueda!" />}
       </SimpleGrid>
     </Box>
   )
