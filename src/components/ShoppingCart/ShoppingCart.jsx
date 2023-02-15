@@ -4,6 +4,7 @@ import { Drawer, DrawerOverlay, DrawerCloseButton, DrawerHeader, DrawerContent, 
 import { useDispatch, useSelector } from 'react-redux';
 import { CartProductCard } from '../CartProductCard/CartProductCard.jsx';
 import { removeAllProductsFromCart } from '../../redux/actions/cart-actions.js';
+import { calculateTotal } from '../../utils/subtotals.js';
 
 export const ShoppingCart = (props) => {
   //desestructuro las propiedades de administrador de visibilidad del carro
@@ -12,7 +13,11 @@ export const ShoppingCart = (props) => {
   //llamo al estado de productos en el carro
   const {productsCart} = useSelector(state => state.cart);
 
-  const dispatch = useDispatch()
+  //llamo al despachador de acciones
+  const dispatch = useDispatch();
+
+  //llamo a la funcion totalizadora y le paso como parametro los productos del carro
+  const {subtotal, shippingCost, total} = calculateTotal(productsCart);
 
   return (
     <>
@@ -36,15 +41,15 @@ export const ShoppingCart = (props) => {
             </Container>
             <Divider />
             <SimpleGrid columns={2} spacing="10px" p="10px">
-              <Text fontSize="md" fontWeight="bold">Subtotal</Text>
-              <Text fontSize="md" justifySelf="end">$1500</Text>
-              <Text fontSize="md" fontWeight="bold">Envio</Text>
-              <Text fontSize="md" justifySelf="end">$3200</Text>
+              <Text fontSize="md">Subtotal</Text>
+              <Text fontSize="md" fontWeight="bold" justifySelf="end">{`$${subtotal}`}</Text>
+              <Text fontSize="md">Envio</Text>
+              <Text fontSize="md" fontWeight="bold" justifySelf="end">{`$${shippingCost}`}</Text>
             </SimpleGrid>
             <Divider />
             <SimpleGrid columns={2} spacing="10px" p="10px">
-              <Text fontSize="md" fontWeight="bold">Total</Text>
-              <Text fontSize="md" justifySelf="end">$4700</Text>
+              <Text fontSize="md">Total</Text>
+              <Text fontSize="md" fontWeight="bold" justifySelf="end">{`$${total}`}</Text>
             </SimpleGrid>
           </DrawerBody>
 

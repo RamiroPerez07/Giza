@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Stack, InputLeftElement, Input, InputGroup, Button } from '@chakra-ui/react';
+import { Box, Stack, InputLeftElement, Input, InputGroup, Button, IconButton } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { colorPalette } from '../../styles/colors';
 import { FaFilter} from 'react-icons/fa';
@@ -9,6 +9,8 @@ import { FilterProduct } from '../FilterProduct/FilterProduct.jsx';
 import { filterProducts, updateFilterParameters } from '../../redux/actions/filter-products';
 import { useDispatch, useSelector } from 'react-redux';
 import { useColorModeValue } from '@chakra-ui/react';
+import { AiOutlineSortAscending } from 'react-icons/ai';
+import { SortProduct } from '../SortProduct/SortProduct';
 
 export const ProductSearch = () => {
 
@@ -16,11 +18,18 @@ export const ProductSearch = () => {
   const dispatch = useDispatch();
 
   //configuraciones de hooks para la ventana de filtro
-  const { isOpen, onOpen, onClose } = useDisclosure({})
+  const {isOpen: isFilterFrameOpen, onOpen: onFilterFrameOpen, onClose: OnFilterFrameClose } = useDisclosure({id:"filtro"});
 
-  //configuro la referencia inicial (modal) y final (componente destino, ej un input de busqueda)
-  const initialRef = useRef(null)
-  const finalRef = useRef(null)
+  //configuraciones hooks para ventana de ordenamiento
+  const {isOpen: isSortFrameOpen, onOpen: OnSortFrameOpen, onClose: OnSortFrameClose} = useDisclosure({id:"ordenamiento"});
+
+  //configuro la referencia inicial (primer combobox en modal FILTRO) y final (componente destino, ej un input de busqueda)
+  const initialRef = useRef(null);
+  const finalRef = useRef(null);
+
+  //configura la referencia inicial (primer radiobutton en modal ORDEN) y final (componente destino, ej input de busqueda)
+  const initialSortRef = useRef(null);
+
 
   //llamo al estado de filtrado de productos
   const {active,filterParameters} = useSelector(state => state.filterProducts)
@@ -28,7 +37,7 @@ export const ProductSearch = () => {
   const handleFilter = e => {
     e.preventDefault();
     dispatch(filterProducts(filterParameters));
-    onClose();
+    OnFilterFrameClose();
   }
 
   const setFilterParameters = (event) => {
@@ -49,9 +58,11 @@ export const ProductSearch = () => {
           />
           <Input onChange={(event)=> setFilterParameters(event)} type='text' placeholder='Buscar producto' focusBorderColor={colorPalette.light.terciary} ref={finalRef} />
         </InputGroup>
-        <Button leftIcon={<FaFilter style={active?fillFilterStyle:emptyFilterStyle} />} variant='outline' onClick={onOpen}>Filtro</Button>
+        <Button leftIcon={<FaFilter style={active?fillFilterStyle:emptyFilterStyle} />} variant='outline' onClick={onFilterFrameOpen}>Filtro</Button>
+        <IconButton aria-label='Ordenar según' icon={<AiOutlineSortAscending />} variant="outline" fontSize="x-large" onClick={OnSortFrameOpen} />
       </Stack>
-      <FilterProduct isOpen={isOpen} onClose={onClose} initialRef={initialRef} finalRef={finalRef} />
+      <FilterProduct isOpen={isFilterFrameOpen} onClose={OnFilterFrameClose} initialRef={initialRef} finalRef={finalRef} />
+      <SortProduct isOpen={isSortFrameOpen} onClose={OnSortFrameClose} initialRef={initialSortRef} finalRef={finalRef} />
     </Box>
   )
 }
