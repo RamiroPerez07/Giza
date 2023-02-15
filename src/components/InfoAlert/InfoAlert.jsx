@@ -3,7 +3,7 @@ import { Alert, AlertIcon } from '@chakra-ui/react';
 
 export const InfoAlert = (props) => {
   return (
-    <Alert status='info' w="auto">
+    <Alert alignSelf="start" status='info' w="auto">
     <AlertIcon />
       {props.text}
     </Alert>

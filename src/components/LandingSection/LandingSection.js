@@ -8,4 +8,5 @@ export const StyledLandingSection = styled(Box)`
   justify-items: center;
   padding: 10px;
   min-height: calc(min(1020px, 100vh) - 80px);
+  grid-auto-rows: min-content;
 `;
