@@ -4,11 +4,16 @@ import { addProductToCart, decreaseProductFromCart, removeProductFromCart } from
 import { useDispatch } from 'react-redux';
 import { colorPalette } from '../../styles/colors.js';
 import { DeleteIcon } from '@chakra-ui/icons';
+import { DeleteProductConfirm } from '../DeleteProductConfirm/DeleteProductConfirm';
+import { useDisclosure } from '@chakra-ui/react';
 
 export const CartProductCard = (product) => {
   const {name, shortDescription, imgUrl, quantity} = product;
 
   const dispatch = useDispatch();
+
+  //llamo al diclosure para administrar el modal
+  const { isOpen: isDeleteProductOpen, onOpen: onDeleteProductOpen, onClose: onDeleteProductClose } = useDisclosure({id:"eliminar-producto"})
 
   return (
     <>
@@ -28,7 +33,7 @@ export const CartProductCard = (product) => {
           size="xs"
           fontSize='12px'
           variant="ghost"
-          onClick={()=>dispatch(removeProductFromCart(product))}
+          onClick={onDeleteProductOpen}
         />
         
         <Image
@@ -56,6 +61,7 @@ export const CartProductCard = (product) => {
           </CardFooter>
         </Stack>
       </Card>
+      <DeleteProductConfirm isOpen={isDeleteProductOpen} onClose={onDeleteProductClose} product={product} />
     </>
   )
 }

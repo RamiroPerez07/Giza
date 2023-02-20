@@ -36,5 +36,15 @@ export const validateEmail = (value) => {
   return error;
 }
 
+export const validateMessage = (value) => {
+  let error;
+  if (!value) {
+    error = "El mensaje es requerido";
+  }else if(value.length >= 255){
+    error = "Solo se admiten hasta 255 caracteres";
+  }
+  return error;
+}
+
 const regexCUIT = /^d{2}-d{8}-d{1}$/
 const regexDNI = /^d{1,2}.?d{3}.?d{3}$/
