@@ -5,4 +5,5 @@ export const StyledContactContainer = styled(SimpleGrid)`
   justify-items: center;
   align-items: start;
   width: 100%;
+  padding: 10px 20px;
 `;
