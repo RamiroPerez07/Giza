@@ -3,7 +3,6 @@ import { Container, Divider, SimpleGrid, Text } from '@chakra-ui/react';
 import { Drawer, DrawerOverlay, DrawerCloseButton, DrawerHeader, DrawerContent, DrawerBody, Button, DrawerFooter } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartProductCard } from '../CartProductCard/CartProductCard.jsx';
-import { removeAllProductsFromCart } from '../../redux/actions/cart-actions.js';
 import { calculateTotal } from '../../utils/subtotals.js';
 import { useDisclosure } from '@chakra-ui/react';
 import { DeleteAllProductsConfirm } from '../DeleteAllProductsConfirm/DeleteAllProductsConfirm.jsx';
@@ -14,9 +13,6 @@ export const ShoppingCart = (props) => {
 
   //llamo al estado de productos en el carro
   const {productsCart} = useSelector(state => state.cart);
-
-  //llamo al despachador de acciones
-  const dispatch = useDispatch();
 
   //llamo a la funcion totalizadora y le paso como parametro los productos del carro
   const {subtotal, shippingCost, total} = calculateTotal(productsCart);
@@ -60,7 +56,7 @@ export const ShoppingCart = (props) => {
 
           <DrawerFooter>
             <Button colorScheme='blue' mr={3}>Confirmar</Button>
-            <Button variant='outline' mr={3} onClick={onDeleteAllProductsOpen}>Eliminar todos</Button>
+            {productsCart.length > 0 && <Button variant='outline' mr={3} onClick={onDeleteAllProductsOpen}>Eliminar todos</Button>}
             <Button variant='outline' mr={3} onClick={onClose}>Salir</Button>
           </DrawerFooter>
         </DrawerContent>

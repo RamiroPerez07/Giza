@@ -18,6 +18,7 @@ export const ContactForm = () => {
             alert(JSON.stringify(values, null, 2))
             actions.setSubmitting(false)
           }, 1000) //se simula que el feedback demora 1 seg
+          actions.resetForm(); //reseteo formulario
         }}
       >
         {(props) => (
