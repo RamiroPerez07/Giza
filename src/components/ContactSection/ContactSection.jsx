@@ -8,7 +8,7 @@ export const ContactSection = () => {
   return (
     <>  
       <LandingSection>
-        <StyledContactContainer columns={2} spacing="25px" minChildWidth="500px">
+        <StyledContactContainer columns={2} spacing="25px" minChildWidth="300px">
           <ContactForm />
           <Map />
         </StyledContactContainer>
