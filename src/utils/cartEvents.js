@@ -19,5 +19,17 @@ export const handleDeleteProductFromCart = (product, toast, dispatch, callback) 
     isClosable: true,
   };
   dispatch(callback(product));
-  toast(toastStyle)
+  toast(toastStyle);
+}
+
+export const handleDeleteAllProductsFromCart = (toast, dispatch, callback) => {
+  const toastStyle = {
+    title: 'Productos eliminados',
+    description: "¡Se han eliminado todos los productos del carrito!",
+    status: 'info',
+    duration: 4000,
+    isClosable: true,
+  };
+  dispatch(callback());
+  toast(toastStyle);
 }
