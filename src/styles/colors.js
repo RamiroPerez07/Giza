@@ -12,5 +12,6 @@ export const colorPalette = {
   chakraScheme: {
     bg: "teal",
     button: "teal",
+    green: "#48BB78",
   }
 }

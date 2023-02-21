@@ -1,9 +1,9 @@
 export const handleAddProductToCart = (product, toast, dispatch, callback) => {
   const toastStyle = {
     title: 'Producto agregado',
-    description: `¡Se agrego una unidad de ${product.name} al carrito!`,
+    description: `¡Se agregó una unidad de ${product.name} al carrito!`,
     status: 'success',
-    duration: 4000,
+    duration: 3000,
     isClosable: true,
   };
   dispatch(callback(product));
@@ -15,7 +15,7 @@ export const handleDeleteProductFromCart = (product, toast, dispatch, callback) 
     title: 'Producto eliminado',
     description: `¡El producto ${product.name} se eliminó del carrito!`,
     status: 'info',
-    duration: 4000,
+    duration: 3000,
     isClosable: true,
   };
   dispatch(callback(product));
@@ -27,7 +27,7 @@ export const handleDeleteAllProductsFromCart = (toast, dispatch, callback) => {
     title: 'Productos eliminados',
     description: "¡Se han eliminado todos los productos del carrito!",
     status: 'info',
-    duration: 4000,
+    duration: 3000,
     isClosable: true,
   };
   dispatch(callback());

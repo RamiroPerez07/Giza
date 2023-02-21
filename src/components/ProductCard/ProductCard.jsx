@@ -7,6 +7,8 @@ import { StyledCardBody } from './ProductCard';
 import { useDispatch } from 'react-redux';
 import {addProductToCart} from '../../redux/actions/cart-actions.js';
 import { handleAddProductToCart } from '../../utils/cartEvents';
+import {MdLocalShipping} from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 export const ProductCard = (product) => {
   const {id, name, brand, shortDescription, description, price, stock, imgUrl, freeShipping} = product;
@@ -17,14 +19,25 @@ export const ProductCard = (product) => {
   //llamo a la funcion de modales
   const toast = useToast();
 
+  //llamo al use navigate para entrar al product detail
+  const navigate = useNavigate();
+
   return (
     <>
-      <Card maxW='sm'>
+      <Card maxW="300px">
         <StyledCardBody>
           <Image src={imgUrl} alt='Imagen del producto' borderRadius='lg' w="120px" h="120px" objectFit="contain" />
           <Stack mt='6' spacing='3'>
             <Heading size='md'>{name}</Heading>
-            <Text>{shortDescription}</Text>
+            <Text minH="48px">{shortDescription}</Text>
+            <Stack direction="row" minH="20px">
+              {product.freeShipping && 
+              <>
+                <MdLocalShipping color={colorPalette.chakraScheme.green} />
+                <Text color={colorPalette.chakraScheme.green} fontSize="small" fontWeight="bold">Envío gratuito</Text>
+              </>
+              }
+            </Stack>
             <Text color={useColorModeValue(colorPalette.light.terciary,colorPalette.dark.terciary)} fontSize='2xl' fontWeight="500">$ {price}</Text>
           </Stack>
         </StyledCardBody>
@@ -32,7 +45,7 @@ export const ProductCard = (product) => {
         <CardFooter display="grid" justifyItems="center">
           <ButtonGroup spacing='2'>
             <Button onClick={()=>handleAddProductToCart(product, toast, dispatch, addProductToCart)} leftIcon={<BsFillCartFill />} variant='solid' colorScheme={colorPalette.chakraScheme.button}>Agregar</Button>
-            <Button variant='ghost' colorScheme={colorPalette.chakraScheme.button}>Mas info</Button>
+            <Button variant='ghost' colorScheme={colorPalette.chakraScheme.button} onClick={()=>navigate(`${product.name}`,{state:{id:product.id}})}>Mas info</Button>
           </ButtonGroup>
         </CardFooter>
       </Card>
