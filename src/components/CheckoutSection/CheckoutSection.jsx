@@ -26,7 +26,7 @@ export const CheckoutSection = () => {
     <>
       <LandingSection>
         <Breadcrum sections={sections} />
-        <StyledSimpleGrid w="full" minChildWidth="300px">
+        <StyledSimpleGrid w="full" minChildWidth="300px" rowGap="30px">
           <CheckoutDetail />
           <CheckoutForm />
         </StyledSimpleGrid>
