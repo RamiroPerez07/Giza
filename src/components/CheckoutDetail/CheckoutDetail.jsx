@@ -13,9 +13,9 @@ export const CheckoutDetail = () => {
 
   return (
     <>
-      <Stack w="full" maxW="425px">
+      <Stack w="full" maxW="500px">
         <Heading as="h2" fontSize="md">Detalle del pedido</Heading>
-        <Container mb="20px" p="5px" display="grid" gap="10px" gridAutoRows="min-content" h="250px" overflowY="scroll" centerContent>
+        <Container alignSelf="center" mb="20px" p="5px" display="grid" gap="10px" gridAutoRows="min-content" h="250px" overflowY="scroll" centerContent>
           {
             productsCart?.map(product => <CartProductCard key={product.id} {...product} />)
           }
