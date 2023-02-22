@@ -3,7 +3,7 @@ import { Form } from "formik";
 
 export const StyledForm = styled(Form)`
   width: 100%;
-  max-width: 500px;
+  max-width: 450px;
   display: grid;
   gap: 20px;
   grid-auto-rows: min-content;

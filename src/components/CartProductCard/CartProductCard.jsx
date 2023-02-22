@@ -66,7 +66,8 @@ export const CartProductCard = (product) => {
           </CardBody>
 
           <CardFooter mt="0px !important" p="0px 7px 7px 7px" alignItems="center">
-            <Text fontSize="xs" mr="10px">Cantidad</Text>
+            <Text fontSize="xs" mr="30px" fontWeight="bold">$ {product.price}</Text>
+            <Text fontSize="xs" mr="10px">Cantidad</Text> 
             <IconButton onClick={() => handleDecreaseProduct(product)} variant='solid' colorScheme='blue' size="xs" mr="10px" icon={product.quantity === 1 ? <DeleteIcon boxSize="3" /> : <MinusIcon boxSize="2.5" />} />
             <Text fontSize="xs" fontWeight="bold" mr="10px" minW="15px" align="center">{quantity}</Text>
             <IconButton onClick={() => dispatch(addProductToCart(product))} variant='solid' colorScheme='blue' size="xs" icon={<AddIcon boxSize="2.5" />} />

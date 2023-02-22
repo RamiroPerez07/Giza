@@ -17,7 +17,7 @@ export const Routes = () => {
         <Route path=':productos' element={<ProductDescription />} />
       </Route>
       <Route path='/contacto' element={<Contact />} />
-      <Route path='/checkout' element={<Checkout />} />
+      <Route path='/confirmar-pedido' element={<Checkout />} />
     </ReactDomRoutes>
   )
 }

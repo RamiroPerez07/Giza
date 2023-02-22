@@ -1,11 +1,12 @@
 import React from 'react';
 import { Container, Divider, SimpleGrid, Text } from '@chakra-ui/react';
 import { Drawer, DrawerOverlay, DrawerCloseButton, DrawerHeader, DrawerContent, DrawerBody, Button, DrawerFooter } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { CartProductCard } from '../CartProductCard/CartProductCard.jsx';
 import { calculateTotal } from '../../utils/subtotals.js';
 import { useDisclosure } from '@chakra-ui/react';
 import { DeleteAllProductsConfirm } from '../DeleteAllProductsConfirm/DeleteAllProductsConfirm.jsx';
+import { useNavigate } from 'react-router-dom';
 
 export const ShoppingCart = (props) => {
   //desestructuro las propiedades de administrador de visibilidad del carro
@@ -19,6 +20,9 @@ export const ShoppingCart = (props) => {
 
   //llamo al disclosure para manipular los modales del carrito
   const { isOpen: isDeleteAllProductsOpen, onOpen: onDeleteAllProductsOpen, onClose: onDeleteAllProductsClose } = useDisclosure({id:"eliminar-todos-producto"})
+
+  //llamo al administrador de navegacion
+  const navigate = useNavigate();
 
   return (
     <>
@@ -55,7 +59,7 @@ export const ShoppingCart = (props) => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button colorScheme='blue' mr={3}>Confirmar</Button>
+            <Button colorScheme='blue' mr={3} onClick={()=> navigate("/confirmar-pedido")}>Confirmar</Button>
             {productsCart.length > 0 && <Button variant='outline' mr={3} onClick={onDeleteAllProductsOpen}>Eliminar todos</Button>}
             <Button variant='outline' mr={3} onClick={onClose}>Salir</Button>
           </DrawerFooter>
