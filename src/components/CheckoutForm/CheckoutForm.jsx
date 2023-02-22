@@ -9,7 +9,7 @@ export const CheckoutForm = () => {
   return (
     <>
       <Stack w="full" alignItems="center">
-        <Heading as="h2" fontSize="md">¡Completa con tus datos para finalizar!</Heading>
+        <Heading as="h2" fontSize="md" mb="10px">¡Completa con tus datos para finalizar!</Heading>
         <Formik
           initialValues={{ name: '', tel: '', location: '', address: ''}}
           onSubmit={(values, actions) => {
