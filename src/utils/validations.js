@@ -46,5 +46,21 @@ export const validateMessage = (value) => {
   return error;
 }
 
+export const validateLocation = (value) => {
+  let error;
+  if (!value) {
+    error = "La localidad es requerida";
+  }
+  return error;
+}
+
+export const validateAddress = (value) => {
+  let error;
+  if (!value) {
+    error = "La dirección es requerida";
+  }
+  return error;
+}
+
 const regexCUIT = /^d{2}-d{8}-d{1}$/
 const regexDNI = /^d{1,2}.?d{3}.?d{3}$/

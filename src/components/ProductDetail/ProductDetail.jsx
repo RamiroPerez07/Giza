@@ -1,9 +1,13 @@
-import { Heading, Image, Text } from '@chakra-ui/react';
+import { Button, Heading, Image, Text, Stack, useToast } from '@chakra-ui/react';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { LandingSection } from '../LandingSection/LandingSection.jsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Breadcrum } from '../Breadcrum/Breadcrum.jsx';
+import {colorPalette} from '../../styles/colors.js';
+import { MdLocalShipping } from 'react-icons/md';
+import { handleAddProductToCart } from '../../utils/cartEvents.js';
+import { addProductToCart } from '../../redux/actions/cart-actions.js';
 
 export const ProductDetail = () => {
 
@@ -43,18 +47,33 @@ export const ProductDetail = () => {
     },
   ];
 
-  console.log(location)
+  //llamo al despachador de eventos
+  const dispatch = useDispatch();
+
+  //llamo al administrador del modal
+  const toast = useToast();
 
   return (
     <>
       <LandingSection>
         <Breadcrum sections={sections} />
-        <Heading as="h2">{name}</Heading>
-        <Text>{brand}</Text>
-        <Image src={imgUrl} w="full" maxW="300px" maxH="300px"/>
-        <Text>{description}</Text>
-        <Text>{freeShipping}</Text>
-        <Text>{price}</Text>
+        <Stack w="full" maxW="600px" p="10px 20px">
+          <Heading as="h2" alignSelf="center">{name}</Heading>
+          <Text alignSelf="center">{brand}</Text>
+          <Image src={imgUrl} w="full" maxW="250px" maxH="250px" alignSelf="center"/>
+          <Heading as="h3" fontSize="medium">Detalle del producto</Heading>
+          <Text fontSize="small">{description}</Text>
+          <Stack direction="row" minH="20px">
+            {freeShipping && 
+            <>
+              <MdLocalShipping color={colorPalette.chakraScheme.green} />
+              <Text color={colorPalette.chakraScheme.green} fontSize="medium" fontWeight="bold">Envío gratuito</Text>
+            </>
+            }
+          </Stack>
+          <Text fontSize="x-large" fontWeight="bold">$ {price}</Text>
+          <Button colorScheme={colorPalette.chakraScheme.button} alignSelf="center" onClick={()=>handleAddProductToCart(currentProduct, toast, dispatch, addProductToCart)}>Agregar al carrito</Button>
+        </Stack>
       </LandingSection>
     </>
   )

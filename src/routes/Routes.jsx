@@ -4,6 +4,7 @@ import { Home } from '../pages/Home.jsx';
 import { Products } from '../pages/Products.jsx';
 import { Contact } from '../pages/Contact.jsx';
 import { ProductDescription } from '../pages/ProductDescription.jsx';
+import { Checkout } from '../pages/Checkout.jsx';
 
 export const Routes = () => {
   return (
@@ -16,6 +17,7 @@ export const Routes = () => {
         <Route path=':productos' element={<ProductDescription />} />
       </Route>
       <Route path='/contacto' element={<Contact />} />
+      <Route path='/checkout' element={<Checkout />} />
     </ReactDomRoutes>
   )
 }
