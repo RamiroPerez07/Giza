@@ -7,6 +7,7 @@ import { calculateTotal } from '../../utils/subtotals.js';
 import { useDisclosure } from '@chakra-ui/react';
 import { DeleteAllProductsConfirm } from '../DeleteAllProductsConfirm/DeleteAllProductsConfirm.jsx';
 import { useNavigate } from 'react-router-dom';
+import { colorPalette } from '../../styles/colors.js';
 
 export const ShoppingCart = (props) => {
   //desestructuro las propiedades de administrador de visibilidad del carro
@@ -59,7 +60,7 @@ export const ShoppingCart = (props) => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button colorScheme='blue' mr={3} onClick={()=> {if (productsCart.length>0) navigate("/confirmar-pedido")} }>Confirmar</Button>
+            <Button colorScheme={colorPalette.chakraScheme.button} mr={3} onClick={()=> {if (productsCart.length>0) navigate("/confirmar-pedido")}} >Confirmar</Button>
             {productsCart.length > 0 && <Button variant='outline' mr={3} onClick={onDeleteAllProductsOpen}>Eliminar todos</Button>}
             <Button variant='outline' mr={3} onClick={onClose}>Salir</Button>
           </DrawerFooter>

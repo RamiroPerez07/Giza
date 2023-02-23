@@ -30,8 +30,6 @@ export const HeaderContent = () => {
   //llamo al estado del carro para obtener todos los productos del carrito actual
   const {productsCart} = useSelector(state => state.cart);
 
-  console.log(calculateCartProductsLength(productsCart));
-
   return (
     <StyledHeaderContent bg={useColorModeValue(colorPalette.light.primary,colorPalette.dark.primary)}>
       <StyledImg src={imgGiza} alt="Giza" onClick={()=> navigate("/")} />

@@ -5,6 +5,8 @@ import { Products } from '../pages/Products.jsx';
 import { Contact } from '../pages/Contact.jsx';
 import { ProductDescription } from '../pages/ProductDescription.jsx';
 import { Checkout } from '../pages/Checkout.jsx';
+import { Login } from '../pages/Login.jsx';
+import {SignUp} from '../pages/SignUp.jsx';
 
 export const Routes = () => {
   return (
@@ -18,6 +20,8 @@ export const Routes = () => {
       </Route>
       <Route path='/contacto' element={<Contact />} />
       <Route path='/confirmar-pedido' element={<Checkout />} />
+      <Route path='/ingresar' element={<Login />} />
+      <Route path='/registro' element={<SignUp />} />
     </ReactDomRoutes>
   )
 }

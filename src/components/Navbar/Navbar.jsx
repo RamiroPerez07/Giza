@@ -1,4 +1,4 @@
-import { useColorMode } from '@chakra-ui/react';
+import { Text, useColorMode } from '@chakra-ui/react';
 import React, {useRef} from 'react';
 import { StyledNavbar,StyledNavLink, StyledBurgerIcon } from './Navbar.js';
 import { Button } from '@chakra-ui/react';
@@ -10,6 +10,9 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useColorModeValue } from '@chakra-ui/react';
 import { colorPalette } from '../../styles/colors.js';
 import { useOnClickOutside } from '../../hooks/menu-burger-hook.js';
+//import {signInWithGoogle} from '../../firebase/firebase-utils.js';
+import { useNavigate } from 'react-router-dom';
+import { Avatar, Stack } from '@chakra-ui/react';
 
 export const Navbar = () => {
   //llamo al hook para utilizar el estado del modo de color actual
@@ -28,6 +31,14 @@ export const Navbar = () => {
   //con esta funcion (custom hook) agrego la funcionalidad de ocultarse con un evento especifico, en este caso click fuera del menu
   useOnClickOutside(node, nodeBtn, () => dispatch(toggleBurgerMenu()));
 
+  //llamo al administrador de navegacion
+  const navigate = useNavigate();
+
+  //llamo al estado del usuario para saber si esta logeado o no. En base a esto mostrar una info u la otra
+  const {currentUser} = useSelector(state => state.user);
+
+
+
   return (
     <>
       <StyledBurgerIcon className="burger-icon" icon={!showBurgerMenu ? <HamburgerIcon w={5} h={5} /> : <CloseIcon w={3} h={3} />} aria-label='Abrir Menu' onClick={()=> dispatch(toggleBurgerMenu())} ref={nodeBtn} />
@@ -35,8 +46,16 @@ export const Navbar = () => {
         <StyledNavLink colormode={colorMode} className={({ isActive }) => (isActive ? "active" : "")} to={'/'}>Inicio</StyledNavLink>
         <StyledNavLink colormode={colorMode} className={({ isActive }) => (isActive ? "active" : "")} to={'/productos'}>Productos</StyledNavLink>
         <StyledNavLink colormode={colorMode} className={({ isActive }) => (isActive ? "active" : "")} to={'/contacto'}>Contacto</StyledNavLink>
-        <Button leftIcon={<CgLogIn />} colorScheme={'teal'}>Ingresar</Button>
-        <Button leftIcon={<FaUserPlus />} variant="outline">Registro</Button>
+        {
+          currentUser ?
+          <Stack as={Button} variant="ghost" direction="row" spacing="10px">
+            <Avatar name="profile-image" src={currentUser.photoURL} size="sm" />
+            <Text>{currentUser.displayName}</Text>
+          </Stack>
+          :
+          <Button leftIcon={<CgLogIn />} colorScheme={'teal'} onClick={()=>navigate("/ingresar")}>Ingresar</Button>
+        }
+        <Button leftIcon={<FaUserPlus />} variant="outline" onClick={()=>navigate("/registro")}>Registro</Button>
       </StyledNavbar>
     </>
   )
