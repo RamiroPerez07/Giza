@@ -25,3 +25,18 @@ export const StyledMenuOptions = styled(Box)`
   align-items: center;
   justify-items: center;
 `;
+
+export const StyledCounter = styled.div`
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  background-color: red;
+  color: white;
+  display: grid;
+  place-items: center;
+  place-content: center;
+  font-size: x-small;
+`;

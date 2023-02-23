@@ -10,3 +10,7 @@ export function calculateTotal(products){
     total: calculateSubtotal(products) + calculateShippingSubtotal(products),
   }
 }
+
+export const calculateCartProductsLength = (products) => {
+  return products.reduce((acc, item) => acc + item.quantity, 0);
+}

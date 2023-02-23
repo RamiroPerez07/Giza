@@ -59,7 +59,7 @@ export const ShoppingCart = (props) => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button colorScheme='blue' mr={3} onClick={()=> navigate("/confirmar-pedido")}>Confirmar</Button>
+            <Button colorScheme='blue' mr={3} onClick={()=> {if (productsCart.length>0) navigate("/confirmar-pedido")} }>Confirmar</Button>
             {productsCart.length > 0 && <Button variant='outline' mr={3} onClick={onDeleteAllProductsOpen}>Eliminar todos</Button>}
             <Button variant='outline' mr={3} onClick={onClose}>Salir</Button>
           </DrawerFooter>
