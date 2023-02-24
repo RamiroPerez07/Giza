@@ -1,42 +1,33 @@
-import { Text } from '@chakra-ui/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Drawer, DrawerOverlay, DrawerBody, DrawerHeader, DrawerFooter, Button, DrawerCloseButton, DrawerContent, Text, Avatar } from '@chakra-ui/react';
+import { colorPalette } from '../../styles/colors';
 
-export const ProfileModal = () => {
+export const ProfileModal = (props) => {
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
+  //desestructuro props
+  const { isOpen, onClose, btnRef} = props;
 
   const {currentUser} = useSelector(state => state.user);
+  console.log(currentUser)
 
   return (
     <>
-      <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
-        Open
-      </Button>
-      <Drawer
-        isOpen={isOpen}
-        placement='right'
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
+      <Drawer isOpen={isOpen} placement='right' onClose={onClose} finalFocusRef={btnRef} >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent top="80px !important">
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Mi cuenta</DrawerHeader>
 
           <DrawerBody>
-            <Text>{currentUser.displayName}</Text>
-            <Text>{currentUser.email}</Text>
-            <Text>{currentUser.photoURL}</Text>
-            <Text>{currentUser.createdAt}</Text>
+            <Avatar name="img-profile" src={currentUser.photoURL} alignSelf="center" />
+            <Text mt="10px">{currentUser.displayName}</Text>
+            <Text mt="10px">{currentUser.email}</Text>
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Save</Button>
+            <Button mr={3} colorScheme={colorPalette.chakraScheme.button}>Guardar</Button>
+            <Button variant='outline' onClick={onClose}>Salir</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

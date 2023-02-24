@@ -10,9 +10,10 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useColorModeValue } from '@chakra-ui/react';
 import { colorPalette } from '../../styles/colors.js';
 import { useOnClickOutside } from '../../hooks/menu-burger-hook.js';
-//import {signInWithGoogle} from '../../firebase/firebase-utils.js';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, Stack } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
+import { ProfileModal } from '../ProfileModal/ProfileModal.jsx';
 
 export const Navbar = () => {
   //llamo al hook para utilizar el estado del modo de color actual
@@ -37,7 +38,9 @@ export const Navbar = () => {
   //llamo al estado del usuario para saber si esta logeado o no. En base a esto mostrar una info u la otra
   const {currentUser} = useSelector(state => state.user);
 
-
+  
+  const { isOpen:isProfileModalOpen, onOpen:onProfileModalOpen, onClose: onProfileModalClose } = useDisclosure({id:"profile-modal"})
+  const btnRef = useRef(); //referencia del boton
 
   return (
     <>
@@ -48,7 +51,7 @@ export const Navbar = () => {
         <StyledNavLink colormode={colorMode} className={({ isActive }) => (isActive ? "active" : "")} to={'/contacto'}>Contacto</StyledNavLink>
         {
           currentUser ?
-          <Stack as={Button} variant="ghost" direction="row" spacing="10px">
+          <Stack as={Button} variant="ghost" direction="row" spacing="10px" onClick={onProfileModalOpen} ref={btnRef}>
             <Avatar name="profile-image" src={currentUser.photoURL} size="sm" />
             <Text>{currentUser.displayName}</Text>
           </Stack>
@@ -56,6 +59,7 @@ export const Navbar = () => {
           <Button leftIcon={<CgLogIn />} colorScheme={'teal'} onClick={()=>navigate("/ingresar")}>Ingresar</Button>
         }
         <Button leftIcon={<FaUserPlus />} variant="outline" onClick={()=>navigate("/registro")}>Registro</Button>
+        <ProfileModal isOpen={isProfileModalOpen} onClose={onProfileModalClose} btnRef={btnRef} />
       </StyledNavbar>
     </>
   )
