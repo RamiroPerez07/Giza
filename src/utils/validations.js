@@ -62,5 +62,21 @@ export const validateAddress = (value) => {
   return error;
 }
 
+export const validateUsername = (value) => {
+  let error;
+  if (!value) {
+    error= "El nombre de usuario es requerido"
+  }
+  return error;
+}
+
+export const validatePassword = (value) => {
+  let error;
+  if (!value) {
+    error= "La contraseña es requerida"
+  }
+  return error;
+}
+
 const regexCUIT = /^d{2}-d{8}-d{1}$/
 const regexDNI = /^d{1,2}.?d{3}.?d{3}$/

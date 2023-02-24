@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Drawer, DrawerOverlay, DrawerBody, DrawerHeader, DrawerFooter, Button, DrawerCloseButton, DrawerContent, Text, Avatar } from '@chakra-ui/react';
+import { Drawer, DrawerOverlay, DrawerBody, DrawerHeader, DrawerFooter, Button, DrawerCloseButton, DrawerContent, Text, Avatar, Divider } from '@chakra-ui/react';
 import { colorPalette } from '../../styles/colors';
+import {auth} from '../../firebase/firebase-utils.js';
 
 export const ProfileModal = (props) => {
 
@@ -19,14 +20,20 @@ export const ProfileModal = (props) => {
           <DrawerCloseButton />
           <DrawerHeader>Mi cuenta</DrawerHeader>
 
-          <DrawerBody>
-            <Avatar name="img-profile" src={currentUser.photoURL} alignSelf="center" />
+          {
+            currentUser &&
+            <DrawerBody>
+            <Avatar name="img-profile" src={currentUser.photoURL} />
             <Text mt="10px">{currentUser.displayName}</Text>
             <Text mt="10px">{currentUser.email}</Text>
-          </DrawerBody>
+            <Divider mt="10px" />
+            <Text cursor="pointer" mt="10px" onClick={()=>{onClose();}} >Mis pedidos</Text>
+            <Divider mt="10px" />
+            <Text cursor="pointer" mt="10px" onClick={()=>{auth.signOut().then(onClose())}}>Cerrar sesión</Text>
+          </DrawerBody>}
 
           <DrawerFooter>
-            <Button mr={3} colorScheme={colorPalette.chakraScheme.button}>Guardar</Button>
+            {/*<Button mr={3} colorScheme={colorPalette.chakraScheme.button}>Guardar</Button>*/}
             <Button variant='outline' onClick={onClose}>Salir</Button>
           </DrawerFooter>
         </DrawerContent>

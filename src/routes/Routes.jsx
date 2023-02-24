@@ -7,6 +7,7 @@ import { ProductDescription } from '../pages/ProductDescription.jsx';
 import { Checkout } from '../pages/Checkout.jsx';
 import { Login } from '../pages/Login.jsx';
 import {SignUp} from '../pages/SignUp.jsx';
+import { ProtectedRoute } from '../components/ProtectedRoute/ProtectedRoute.jsx';
 
 export const Routes = () => {
   return (
@@ -19,7 +20,14 @@ export const Routes = () => {
         <Route path=':productos' element={<ProductDescription />} />
       </Route>
       <Route path='/contacto' element={<Contact />} />
-      <Route path='/confirmar-pedido' element={<Checkout />} />
+      <Route
+        path="/confirmar-pedido"
+        element={
+          <ProtectedRoute redirectTo={"/ingresar"}>
+            <Checkout />
+          </ProtectedRoute>
+        }
+      />
       <Route path='/ingresar' element={<Login />} />
       <Route path='/registro' element={<SignUp />} />
     </ReactDomRoutes>
