@@ -42,7 +42,7 @@ export const Carousel = () => {
     useEffect(() => {
       const timer = setTimeout(() => {
         nextSlide();
-      }, 10000);
+      }, 4000);
       return () => clearTimeout(timer);
     });
 

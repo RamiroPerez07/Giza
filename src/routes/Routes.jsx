@@ -7,6 +7,7 @@ import { ProductDescription } from '../pages/ProductDescription.jsx';
 import { Checkout } from '../pages/Checkout.jsx';
 import { Login } from '../pages/Login.jsx';
 import {SignUp} from '../pages/SignUp.jsx';
+import {RecoverPassword} from '../pages/RecoverPassword.jsx';
 import { ProtectedRoute } from '../components/ProtectedRoute/ProtectedRoute.jsx';
 
 export const Routes = () => {
@@ -30,6 +31,7 @@ export const Routes = () => {
       />
       <Route path='/ingresar' element={<Login />} />
       <Route path='/registro' element={<SignUp />} />
+      <Route path='/restablecer-clave' element={<RecoverPassword />} />
     </ReactDomRoutes>
   )
 }

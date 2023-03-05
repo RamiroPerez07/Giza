@@ -58,7 +58,7 @@ export const Navbar = () => {
           :
           <Button leftIcon={<CgLogIn />} colorScheme={'teal'} onClick={()=>navigate("/ingresar")}>Ingresar</Button>
         }
-        <Button leftIcon={<FaUserPlus />} variant="outline" onClick={()=>navigate("/registro")}>Registro</Button>
+        {!currentUser && <Button leftIcon={<FaUserPlus />} variant="outline" onClick={()=>navigate("/registro")}>Registro</Button>}
         <ProfileModal isOpen={isProfileModalOpen} onClose={onProfileModalClose} btnRef={btnRef} />
       </StyledNavbar>
     </>

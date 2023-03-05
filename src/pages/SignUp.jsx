@@ -1,14 +1,22 @@
 import React from 'react';
 import { Header } from '../components/Header/Header.jsx';
+import { RegisterSection } from '../components/RegisterSection/RegisterSection.jsx';
+import { useLocation } from 'react-router-dom';
+import { useRedirect } from '../hooks/useRedirect.js';
 
 export const SignUp = () => {
+
+  //llamo al estado enviado a la url
+  const {state} = useLocation();
+
+  //llamo al custom hook
+  useRedirect(state?.redirectedFromCheckout ? '/confirmar-pedido' : '/');
+
   return (
     <>
       <Header />
       <main>
-        <h1>Sign Up</h1>
-        <input placeholder='usuario' />
-        <input placeholder='contraseña' />
+        <RegisterSection />
       </main>
     </>
   )

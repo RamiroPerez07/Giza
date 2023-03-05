@@ -1,17 +1,17 @@
 import React from 'react';
 import {LandingSection} from '../LandingSection/LandingSection.jsx';
-import { LoginForm } from '../LoginForm/LoginForm.jsx';
 import { Breadcrum } from '../Breadcrum/Breadcrum.jsx';
+import { RecoverPasswordForm } from '../RecoverPasswordForm/RecoverPasswordForm.jsx';
 
-export const LoginSection = () => {
+export const RecoverPasswordSection = () => {
   const sections = [
     {
       name: "Inicio",
       page: "/",
     },
     {
-      name: "Iniciar sesión",
-      page: "/ingresar",
+      name: "Restablecer contraseña",
+      page: "/restablecer-clave",
     }
   ];
 
@@ -19,7 +19,7 @@ export const LoginSection = () => {
     <>
       <LandingSection>
         <Breadcrum sections={sections} />
-        <LoginForm />
+        <RecoverPasswordForm />
       </LandingSection>
     </>
   )

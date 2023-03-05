@@ -11,7 +11,7 @@ export const Breadcrum = (props) => {
         {sections?.map(section => {
           return (
             <BreadcrumbItem key={section.name}>
-              <BreadcrumbLink as={Link} to={section.page} state={section.state||{}} >{section.name}</BreadcrumbLink>
+              <BreadcrumbLink as={Link} to={section.page} state={section.state||{}} fontSize="sm" >{section.name}</BreadcrumbLink>
             </BreadcrumbItem>
           )
         })}
