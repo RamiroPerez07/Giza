@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { actionCodeSettingsForgotPassword, actionCodeSettingsVerification, firebaseConfig } from "./firebase-config";
 import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth';
-import {doc, getDoc, setDoc, getFirestore} from 'firebase/firestore';
+import {doc, getDoc, setDoc, getFirestore, query, collection, where, orderBy, onSnapshot} from 'firebase/firestore';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -83,3 +83,71 @@ export const resetPassword = email => {
 const provider = new GoogleAuthProvider();
 
 export const signInWithGoogle = () => signInWithPopup(auth,provider);
+
+
+//Ordenes
+export const createOrderDocument = async order => {
+
+  if (!order) return;
+
+  const orderRef = doc(firestore, `pedidos/${order.orderId}`);
+
+  const snapShot = await getDoc(orderRef);
+
+  if(!snapShot.exists()){
+    const createdAt = new Date();
+    try {
+      await setDoc(doc(firestore, `pedidos/${order.orderId}`),{
+        userId: order.userId,
+        shippingDetails: {
+          ...order.shippingDetails
+        },
+        items: [...order.cartItems],
+        price: order.price,
+        shippingCost: order.shippingCost,
+        total: order.total,
+        status: `pending`,
+        createdAt,
+      })
+    } catch (error) {
+      console.log("Error creating order", error.message)
+    }
+  }
+
+  return orderRef;
+
+}
+
+//obtener ordenes (pedidos)
+
+export const getOrders = async (userId, currentOrdersInRedux, cb, action) => {
+  if (!userId) throw new Error("");
+
+  const getOrdersQuery = query(collection(firestore, "pedidos"), where("userId", "==", userId), orderBy("createdAt","desc"));
+
+  //setear las ordenes
+  let orders = await getDoc(getOrdersQuery)
+  .then(querySnapshot => {
+    let orders = [];
+    querySnapshot.forEach(async document => {
+      orders = [...orders, {id: document.id, ...document.data()}];
+      const orderRef = doc(firestore, `pedidos/${document.id}`);
+
+      let documentStatus = document.data().status;
+      if(!currentOrdersInRedux) {
+        onSnapshot(orderRef, snapShot => {
+          const staleData = snapShot.get("status") != documentStatus;
+          documentStatus = snapShot.get("status");
+          staleData && cb(action(userId))
+        })
+      }
+    });
+
+    return orders;
+  })
+  .catch(error => console.log("Error al obtener las ordenes", error))
+
+  return orders;
+
+}
+

@@ -4,21 +4,42 @@ import React from 'react';
 import { validateName, validateTel, validateLocation, validateAddress } from '../../utils/validations';
 import { colorPalette } from '../../styles/colors';
 import { StyledForm } from './CheckoutForm.js';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import * as orderActions from '../../redux/actions/orders-actions.js';
+import * as cartActions from '../../redux/actions/cart-actions.js';
+import { useSelector } from 'react-redux';
+import { calculateTotal } from '../../utils/subtotals';
 
 export const CheckoutForm = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  //llamo al estado del carrito
+  const {productsCart} = useSelector(state => state.cart);
+
+  //llamo a la funcion totalizadora y le paso como parametro los productos del carro
+  const {subtotal, shippingCost, total} = calculateTotal(productsCart);
+
   return (
     <>
       <Stack w="full" alignItems="center">
         <Heading as="h2" fontSize="md" mb="10px">¡Completa con tus datos para finalizar!</Heading>
         <Formik
           initialValues={{ name: '', tel: '', location: '', address: ''}}
-          onSubmit={(values, actions) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2))
-              actions.setSubmitting(false)
-            }, 1000) //se simula que el feedback demora 1 seg
-            actions.resetForm(); //reseteo formulario
-            }}
+          onSubmit={async values => {
+            const orderData = {
+              productsCart,
+              subtotal,
+              shippingCost,
+              total,
+              shippingDetails : {
+                ...values
+              }
+            }
+            console.log(orderData);
+          }}
         >
           {(props) => (
             <StyledForm noValidate>

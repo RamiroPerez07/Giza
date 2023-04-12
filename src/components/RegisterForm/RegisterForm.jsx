@@ -50,7 +50,7 @@ export const RegisterForm = () => {
                 {({ field, form }) => (
                   <FormControl isInvalid={form.errors.password && form.touched.password}>
                     <FormLabel>Contraseña</FormLabel>
-                    <Input {...field} type="password" placeholder='Repetir contraseña' focusBorderColor={colorPalette.light.terciary} />
+                    <Input {...field} type="password" placeholder='Contraseña' focusBorderColor={colorPalette.light.terciary} />
                     <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                   </FormControl>
                 )}
