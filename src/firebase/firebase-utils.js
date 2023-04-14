@@ -102,8 +102,8 @@ export const createOrderDocument = async order => {
         shippingDetails: {
           ...order.shippingDetails
         },
-        items: [...order.cartItems],
-        price: order.price,
+        items: [...order.productsCart],
+        subtotal: order.subtotal,
         shippingCost: order.shippingCost,
         total: order.total,
         status: `pending`,
@@ -136,7 +136,7 @@ export const getOrders = async (userId, currentOrdersInRedux, cb, action) => {
       let documentStatus = document.data().status;
       if(!currentOrdersInRedux) {
         onSnapshot(orderRef, snapShot => {
-          const staleData = snapShot.get("status") != documentStatus;
+          const staleData = snapShot.get("status") !== documentStatus;
           documentStatus = snapShot.get("status");
           staleData && cb(action(userId))
         })

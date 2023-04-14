@@ -17,3 +17,4 @@ export const actionCodeSettingsForgotPassword = {
   'http://localhost:3000/ingresar' :
   '/'
 }
+

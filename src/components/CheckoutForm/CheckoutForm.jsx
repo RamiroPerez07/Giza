@@ -39,6 +39,14 @@ export const CheckoutForm = () => {
               }
             }
             console.log(orderData);
+            try {
+              dispatch(orderActions.createOrder(orderData))
+              navigate("/felicitaciones")
+              dispatch(cartActions.removeAllProductsFromCart())
+            } catch (error) {
+              console.log(error)
+              alert("Error al crear la orden")
+            }
           }}
         >
           {(props) => (

@@ -10,22 +10,21 @@ export const createOrderFail = error => ({
   payload: error,
 });
 
-export const createOrder = orderData => async dispatch => {
+export const createOrder = orderData => dispatch => {
   const {user: {currentUser}} = store.getState();
 
-  try {
-    const orderRef = await createOrderDocument({
-      ...orderData,
-      orderId: uuidv4(),
-      userId: currentUser.id,
-    });
-
+  createOrderDocument({
+    ...orderData,
+    orderId: uuidv4(),
+    userId: currentUser.id,
+  }).then(orderRef=>{
     onSnapshot(orderRef, _snapShot =>{
       dispatch(getFullOrders(currentUser.id));
     })
-  } catch (error) {
+  }).catch(error=>{
     dispatch(createOrderFail(error));
-  }
+  })
+
 }
 
 // Para manejar el loading

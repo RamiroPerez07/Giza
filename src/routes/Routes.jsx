@@ -9,6 +9,7 @@ import { Login } from '../pages/Login.jsx';
 import {SignUp} from '../pages/SignUp.jsx';
 import {RecoverPassword} from '../pages/RecoverPassword.jsx';
 import { ProtectedRoute } from '../components/ProtectedRoute/ProtectedRoute.jsx';
+import { Congratulations } from '../pages/Congratulations.jsx';
 
 export const Routes = () => {
   return (
@@ -32,6 +33,7 @@ export const Routes = () => {
       <Route path='/ingresar' element={<Login />} />
       <Route path='/registro' element={<SignUp />} />
       <Route path='/restablecer-clave' element={<RecoverPassword />} />
+      <Route path='/felicitaciones' element={<Congratulations />} />
     </ReactDomRoutes>
   )
 }
