@@ -15,7 +15,7 @@ export const CongratulationsSection = () => {
         <Text textAlign="center">Tu pedido fue realizado con éxito.</Text>
         <StyledImg src={imgGiza} alt="Giza" onClick={()=> navigate("/")} />
         <Text textAlign="center">¡Muchas gracias por confiar en Giza!</Text>
-        <Button onClick={()=>navigate("/")} variant='solid' colorScheme={colorPalette.chakraScheme.button}>Inicio</Button>
+        <Button onClick={()=>navigate("/pedidos")} variant='solid' colorScheme={colorPalette.chakraScheme.button}>Mis pedidos</Button>
       </Stack>
     </LandingSection>
   )

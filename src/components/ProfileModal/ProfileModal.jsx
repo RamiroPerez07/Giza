@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Drawer, DrawerOverlay, DrawerBody, DrawerHeader, DrawerFooter, Button, DrawerCloseButton, DrawerContent, Text, Avatar, Divider } from '@chakra-ui/react';
 import {auth} from '../../firebase/firebase-utils.js';
+import { useNavigate } from 'react-router-dom';
 
 export const ProfileModal = (props) => {
 
@@ -9,6 +10,7 @@ export const ProfileModal = (props) => {
   const { isOpen, onClose, btnRef} = props;
 
   const {currentUser} = useSelector(state => state.user);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -25,7 +27,7 @@ export const ProfileModal = (props) => {
             <Text mt="10px">{currentUser.displayName}</Text>
             <Text mt="10px">{currentUser.email}</Text>
             <Divider mt="10px" />
-            <Text cursor="pointer" mt="10px" onClick={()=>{onClose();}} >Mis pedidos</Text>
+            <Text cursor="pointer" mt="10px" onClick={()=>{navigate("/pedidos");onClose();}} >Mis pedidos</Text>
             <Divider mt="10px" />
             <Text cursor="pointer" mt="10px" onClick={()=>{auth.signOut().then(onClose())}}>Cerrar sesión</Text>
           </DrawerBody>}

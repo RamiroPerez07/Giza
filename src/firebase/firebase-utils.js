@@ -142,11 +142,11 @@ export const getOrders = async (userId, currentOrdersInRedux, cb, action) => {
         })
       }
     });
-
     return orders;
   })
   .catch(error => console.log("Error al obtener las ordenes", error))
 
+  console.log(orders)
   return orders;
 
 }

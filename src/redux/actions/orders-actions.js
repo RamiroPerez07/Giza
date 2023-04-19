@@ -10,20 +10,22 @@ export const createOrderFail = error => ({
   payload: error,
 });
 
-export const createOrder = orderData => dispatch => {
+export const createOrder = orderData => async dispatch => {
   const {user: {currentUser}} = store.getState();
 
-  createOrderDocument({
-    ...orderData,
-    orderId: uuidv4(),
-    userId: currentUser.id,
-  }).then(orderRef=>{
-    onSnapshot(orderRef, _snapShot =>{
+  try {
+    const orderRef = await createOrderDocument({
+      ...orderData,
+      orderId: uuidv4(),
+      userId: currentUser.id,
+    });
+
+    onSnapshot(orderRef, _snapShot => {
       dispatch(getFullOrders(currentUser.id));
-    })
-  }).catch(error=>{
+    });
+  } catch (error) {
     dispatch(createOrderFail(error));
-  })
+  }
 
 }
 
@@ -49,23 +51,21 @@ export const getOrdersFail = error => ({
 
 export const getFullOrders = userId => async dispatch => {
   const {
-    orders: { orders: currentOrdersInRedux} , 
+    orders: { orders: currentOrdersInRedux },
   } = store.getState();
 
   dispatch(getOrdersStart());
-
   try {
     const orders = await getOrders(
       userId,
       currentOrdersInRedux,
       dispatch,
       getFullOrders
-    )
+    );
     dispatch(getOrdersSuccess(orders));
   } catch (error) {
     dispatch(getOrdersFail(error.message));
   }
-
 }
 
 export const clearError = () => ({
