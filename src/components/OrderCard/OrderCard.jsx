@@ -19,7 +19,7 @@ export const OrderCard = (props) => {
 
   return (
     <>
-    <Card align='center' onClick={()=> navigate(`/resumen/${id}`)} maxW="230px" w="full" position="relative">
+    <Card align='center' onClick={()=> navigate(`/resumen`)} maxW="230px" w="full" position="relative">
       <OrderStatus status="pending" />
       <CardHeader>
         <Heading size='sm'>ID: #001526{/*Pedido: {id.slice(0,7)}*/}</Heading>

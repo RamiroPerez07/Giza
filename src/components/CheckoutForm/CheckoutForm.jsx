@@ -10,6 +10,8 @@ import * as orderActions from '../../redux/actions/orders-actions.js';
 import * as cartActions from '../../redux/actions/cart-actions.js';
 import { useSelector } from 'react-redux';
 import { calculateTotal } from '../../utils/subtotals';
+import { useDisclosure } from '@chakra-ui/react';
+import {AlertDialog,AlertDialogBody,AlertDialogFooter,AlertDialogHeader,AlertDialogContent,AlertDialogOverlay} from '@chakra-ui/react'
 
 export const CheckoutForm = () => {
 
@@ -22,6 +24,10 @@ export const CheckoutForm = () => {
   //llamo a la funcion totalizadora y le paso como parametro los productos del carro
   const {subtotal, shippingCost, total} = calculateTotal(productsCart);
 
+  //llamo al manejador del cuadro de dialogo
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = React.useRef()
+
   return (
     <>
       <Stack w="full" alignItems="center">
@@ -29,6 +35,8 @@ export const CheckoutForm = () => {
         <Formik
           initialValues={{ name: '', tel: '', location: '', address: ''}}
           onSubmit={async values => {
+            onOpen();
+            /*
             const orderData = {
               productsCart,
               subtotal,
@@ -46,7 +54,7 @@ export const CheckoutForm = () => {
             } catch (error) {
               console.log(error)
               alert("Error al crear la orden")
-            }
+            }*/
           }}
         >
           {(props) => (
@@ -93,6 +101,24 @@ export const CheckoutForm = () => {
           }
 
         </Formik>
+          <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
+            <AlertDialogOverlay>
+              <AlertDialogContent>
+                <AlertDialogHeader fontSize='lg' fontWeight='bold'>Confirmar pedido</AlertDialogHeader>
+
+                <AlertDialogBody>¿Deseas confirmar el pedido?</AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <Button ref={cancelRef} onClick={onClose}>
+                    No
+                  </Button>
+                  <Button colorScheme='red' onClick={onClose} ml={3}>
+                    Si
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
       </Stack>
     </>
   )
