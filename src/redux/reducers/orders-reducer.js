@@ -18,18 +18,18 @@ export const ordersReducer = (state = initial_state, action) => {
         ...state,
         loading: false,
         error: null,
-        orders: [...action.payload]
+        orders: [...action.payload],
       }
     case ORDERS_TYPES.FETCH_ORDERS_FAIL:
       return {
         ...state,
         loading: false,
-        error: action.payload
+        error: action.payload,
       }
     case ORDERS_TYPES.FETCH_ORDERS_START:
       return {
         ...state,
-        loading: true
+        loading: true,
       }
     case ORDERS_TYPES.CLEAR_ERROR:
       return {

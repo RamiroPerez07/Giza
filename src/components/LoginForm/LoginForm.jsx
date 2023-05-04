@@ -5,7 +5,7 @@ import { FormControl, FormLabel, Input, FormErrorMessage, Button, Stack, Heading
 import { colorPalette } from '../../styles/colors.js';
 import {  validatePassword, validateEmail } from '../../utils/validations';
 import {FcGoogle} from 'react-icons/fc';
-import {signInUser, signInWithGoogle} from '../../firebase/firebase-utils.js';
+import {createUserProfileDocument, signInUser, signInWithGoogle} from '../../firebase/firebase-utils.js';
 import { useColorModeValue } from '@chakra-ui/react';
 import { Link as ReachLink } from 'react-router-dom';
 
@@ -16,9 +16,13 @@ export const LoginForm = () => {
         <Heading as="h3" size="md">Iniciar Sesión</Heading>
         <Formik
           initialValues={{ email: '', password: '',}}
-          onSubmit={(values, actions) => {
-            signInUser(values.email, values.password);
-            actions.resetForm();
+          onSubmit={async (values) => {
+            try {
+              const {user} = signInUser(values.email, values.password);
+              createUserProfileDocument(user);
+            } catch (error) {
+              alert(error)
+            }
             //setTimeout(() => {
             //  alert(JSON.stringify(values, null, 2))
             //  actions.setSubmitting(false)

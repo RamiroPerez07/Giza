@@ -8,16 +8,23 @@ import {FcGoogle} from 'react-icons/fc';
 import {createUser, signInWithGoogle} from '../../firebase/firebase-utils.js';
 import { useColorModeValue } from '@chakra-ui/react';
 import { Link as ReachLink } from 'react-router-dom';
+import { useRedirect } from '../../hooks/useRedirect.js';
 
 export const RegisterForm = () => {
+  useRedirect("/")
   return (
     <>
       <Stack spacing="20px" p="30px 20px" w="full" maxW="400px" alignItems="center" boxShadow={`0px 1px 3px 1px ${useColorModeValue(colorPalette.light.cardborder, colorPalette.dark.cardborder)}`} borderRadius="10px" bg={useColorModeValue(colorPalette.light.card,colorPalette.dark.card)}>
         <Heading as="h3" size="md">Registro</Heading>
         <Formik
           initialValues={{ username: '', email: '', password: ''}}
-          onSubmit={(values, actions) => {
-            createUser(values.email, values.password, values.username);
+          onSubmit={async (values, actions) => {
+            try {
+              await createUser(values.email, values.password, values.username);
+            } catch (error) {
+              alert(error)
+            }
+            
             actions.resetForm();
             //setTimeout(() => {
             //  alert(JSON.stringify(values, null, 2))

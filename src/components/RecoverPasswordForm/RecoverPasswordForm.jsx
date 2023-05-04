@@ -20,8 +20,8 @@ export const RecoverPasswordForm = () => {
         <Heading as="h3" size="md">Restablecer contraseña</Heading>
         <Formik
           initialValues={{ email: ''}}
-          onSubmit={(values, actions) => {
-            resetPassword(values.email);
+          onSubmit={async (values, actions) => {
+            await resetPassword(values.email);
             actions.resetForm();
             //setTimeout(() => {
             //  alert(JSON.stringify(values, null, 2))

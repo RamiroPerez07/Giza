@@ -2,7 +2,7 @@ import { ORDERS_TYPES } from "../types/types";
 import { store } from "../store";
 import { createOrderDocument } from "../../firebase/firebase-utils";
 import { onSnapshot } from "firebase/firestore";
-import { v4 as uuidv4 } from 'uuid';
+import {uuidv4} from '@firebase/util'
 import { getOrders } from "../../firebase/firebase-utils";
 
 export const createOrderFail = error => ({

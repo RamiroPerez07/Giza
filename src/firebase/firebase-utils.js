@@ -1,13 +1,17 @@
 import { initializeApp } from "firebase/app";
 import { actionCodeSettingsForgotPassword, actionCodeSettingsVerification, firebaseConfig } from "./firebase-config";
 import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth';
-import {doc, getDoc, setDoc, getFirestore, query, collection, where, orderBy, onSnapshot} from 'firebase/firestore';
+import {doc, getDoc, getDocs, setDoc, getFirestore, query, collection, where, orderBy, onSnapshot} from 'firebase/firestore';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+//firestore functions
+export const firestore = getFirestore(app);
+
+
 export const createUserProfileDocument = async userAuth => {
-  if (!userAuth) return;
+  if (!userAuth || !userAuth.emailVerified) return;
 
   const userRef = doc(firestore, `users/${userAuth.uid}`);
   const snapShot = await getDoc(userRef);
@@ -32,7 +36,7 @@ export const createUserProfileDocument = async userAuth => {
 }
 
 
-export const firestore = getFirestore(app);
+
 
 export const auth = getAuth();
 auth.useDeviceLanguage();
@@ -40,7 +44,7 @@ auth.useDeviceLanguage();
 //create manual user
 export const createUser = (email, password, displayName) => {
   createUserWithEmailAndPassword(auth, email, password)
-  .then(useCredential => sendEmailVerification(useCredential.user, actionCodeSettingsVerification)
+  .then(userCredential => sendEmailVerification(userCredential.user, actionCodeSettingsVerification)
   .then(()=>{
     alert(`Mensaje de verificación enviado al mail ${email}`);
     localStorage.setItem('username', displayName)
@@ -55,20 +59,6 @@ export const createUser = (email, password, displayName) => {
 //sign in manual
 export const signInUser = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
-  .then(
-    user => {
-      createUserProfileDocument(user)
-    }
-  ).catch(
-    error => {
-      if(error.code === "auth/wrong-password"){
-        alert("Contraseña incorrecta");
-      }
-      if(error.code === "auth/user-not-found"){
-        alert("Usuario no encontrado")
-      }
-    }
-  );
 }
 
 //recuperar contraseña
@@ -89,6 +79,7 @@ export const signInWithGoogle = () => signInWithPopup(auth,provider);
 export const createOrderDocument = async order => {
 
   if (!order) return;
+  console.log(order)
 
   const orderRef = doc(firestore, `pedidos/${order.orderId}`);
 
@@ -126,7 +117,7 @@ export const getOrders = async (userId, currentOrdersInRedux, cb, action) => {
   const getOrdersQuery = query(collection(firestore, "pedidos"), where("userId", "==", userId), orderBy("createdAt","desc"));
 
   //setear las ordenes
-  let orders = await getDoc(getOrdersQuery)
+  let orders = await getDocs(getOrdersQuery)
   .then(querySnapshot => {
     let orders = [];
     querySnapshot.forEach(async document => {

@@ -10,8 +10,9 @@ import * as orderActions from '../../redux/actions/orders-actions.js';
 import * as cartActions from '../../redux/actions/cart-actions.js';
 import { useSelector } from 'react-redux';
 import { calculateTotal } from '../../utils/subtotals';
-import { useDisclosure } from '@chakra-ui/react';
-import {AlertDialog,AlertDialogBody,AlertDialogFooter,AlertDialogHeader,AlertDialogContent,AlertDialogOverlay} from '@chakra-ui/react'
+//import { useDisclosure } from '@chakra-ui/react';
+//import {AlertDialog,AlertDialogBody,AlertDialogFooter,AlertDialogHeader,AlertDialogContent,AlertDialogOverlay} from '@chakra-ui/react';
+import {} from '../../firebase/firebase-utils.js'
 
 export const CheckoutForm = () => {
 
@@ -25,8 +26,9 @@ export const CheckoutForm = () => {
   const {subtotal, shippingCost, total} = calculateTotal(productsCart);
 
   //llamo al manejador del cuadro de dialogo
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef = React.useRef()
+  //const { isOpen, onOpen, onClose } = useDisclosure()
+  //const cancelRef = React.useRef()
+
 
   return (
     <>
@@ -35,8 +37,6 @@ export const CheckoutForm = () => {
         <Formik
           initialValues={{ name: '', tel: '', location: '', address: ''}}
           onSubmit={async values => {
-            onOpen();
-            /*
             const orderData = {
               productsCart,
               subtotal,
@@ -46,15 +46,18 @@ export const CheckoutForm = () => {
                 ...values
               }
             }
-            console.log(orderData);
             try {
-              dispatch(orderActions.createOrder(orderData))
-              navigate("/felicitaciones")
-              dispatch(cartActions.removeAllProductsFromCart())
+              dispatch(orderActions.createOrder(orderData));
+              navigate("/felicitaciones");
+              dispatch(cartActions.removeAllProductsFromCart());
             } catch (error) {
-              console.log(error)
               alert("Error al crear la orden")
-            }*/
+            }
+
+            
+
+
+
           }}
         >
           {(props) => (
@@ -101,7 +104,7 @@ export const CheckoutForm = () => {
           }
 
         </Formik>
-          <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
+          {/*<AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
             <AlertDialogOverlay>
               <AlertDialogContent>
                 <AlertDialogHeader fontSize='lg' fontWeight='bold'>Confirmar pedido</AlertDialogHeader>
@@ -109,16 +112,17 @@ export const CheckoutForm = () => {
                 <AlertDialogBody>¿Deseas confirmar el pedido?</AlertDialogBody>
 
                 <AlertDialogFooter>
-                  <Button ref={cancelRef} onClick={onClose}>
-                    No
-                  </Button>
-                  <Button colorScheme='red' onClick={onClose} ml={3}>
-                    Si
-                  </Button>
+                  <Button ref={cancelRef} mr={3} onClick={() => {setConfirm(false); onClose()}}>No</Button>
+                  <Button onClick={() => {
+                    setConfirm(true);
+                    onClose();
+                  }
+                    
+                  } colorScheme='red' >Si</Button>  
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialogOverlay>
-          </AlertDialog>
+          </AlertDialog>*/}
       </Stack>
     </>
   )

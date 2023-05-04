@@ -3,6 +3,7 @@ import { Header } from '../components/Header/Header.jsx';
 import { RegisterSection } from '../components/RegisterSection/RegisterSection.jsx';
 import { useLocation } from 'react-router-dom';
 import { useRedirect } from '../hooks/useRedirect.js';
+import { Footer } from '../components/Footer/Footer.jsx';
 
 export const SignUp = () => {
 
@@ -18,6 +19,7 @@ export const SignUp = () => {
       <main>
         <RegisterSection />
       </main>
+      <Footer />
     </>
   )
 }

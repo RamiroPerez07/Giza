@@ -1,7 +1,12 @@
 import React from 'react'
 import {Card, Image, Heading, Stack, CardBody, Text} from '@chakra-ui/react'
+import { formatPrice } from '../../utils/general'
 
-export const SummaryCardProduct = () => {
+export const SummaryCardProduct = (props) => {
+
+  //desestructuro objeto
+  const {name, imgUrl, price, quantity, shortDescription, brand} = props
+
   return (
     <Card
       direction={{ base: 'column', sm: 'row' }}
@@ -11,18 +16,18 @@ export const SummaryCardProduct = () => {
       <Image
         objectFit='cover'
         maxW={{ base: '100%', sm: '100px' }}
-        src='https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60'
-        alt='Imagen del producto'
+        src={imgUrl}
+        alt= {name}
       />
 
       <Stack>
         <CardBody>
-          <Heading size='sm' mb="10px">The perfect latte</Heading>
-          <Text>Brand</Text>
-          <Text fontSize="xs" py='2'>Caffè latte is a coffee beverage of Italian origin made with espresso and steamed milk.</Text>
+          <Heading size='sm' mb="10px">{name}</Heading>
+          <Text>{brand}</Text>
+          <Text fontSize="xs" py='2'>{shortDescription}</Text>
           <Stack direction="row" spacing="6">
-            <Text>Cantidad: 2 </Text>
-            <Text>Precio unitario: $500</Text>
+            <Text>Cantidad: {quantity} </Text>
+            <Text>Precio unitario: {formatPrice(price)}</Text>
           </Stack>
         </CardBody>
       </Stack>

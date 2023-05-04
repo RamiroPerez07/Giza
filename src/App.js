@@ -9,9 +9,8 @@ import { setCurrentUser } from "./redux/actions/user-actions";
 function onAuthStateChange(cb, action){
   onAuthStateChanged(auth, async userAuth => {
     if (userAuth) {
-      const userRef = await createUserProfileDocument(userAuth);
-
-      onSnapshot(userRef, snapsot => cb(action({id:snapsot.id, ...snapsot.data()})))
+      const userRef = await createUserProfileDocument(userAuth).catch(error => console.log(error));
+      onSnapshot(userRef, snapshot => cb(action({id:snapshot.id, ...snapshot.data()})));
     } else {
       cb(action(null));
     }

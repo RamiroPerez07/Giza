@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardHeader, Heading, CardBody, CardFooter, Button, Text } from '@chakra-ui/react';
-import { Timestamp } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import {formatDate, formatPrice} from '../../utils/general.js';
 import {colorPalette} from '../../styles/colors.js'; 
@@ -11,24 +10,20 @@ export const OrderCard = (props) => {
   const {createdAt, status, total, id } = props;
 
   const navigate = useNavigate();
-  
-  /*const createOrderAt = new Timestamp(
-    createdAt.seconds, 
-    createdAt.nanoseconds
-  ).toDate();*/
+
 
   return (
     <>
-    <Card align='center' onClick={()=> navigate(`/resumen`)} maxW="230px" w="full" position="relative">
-      <OrderStatus status="pending" />
+    <Card align='center' onClick={()=> navigate(`/pedidos/${id}`)} maxW="230px" w="full" position="relative">
+      <OrderStatus status={status} />
       <CardHeader>
-        <Heading size='sm'>ID: #001526{/*Pedido: {id.slice(0,7)}*/}</Heading>
+        <Heading size='sm'>ID: #{id.slice(0,6)}</Heading>
       </CardHeader>
       <CardBody>
-        <Text size='xs'>Detalle{/*{formatDate(createOrderAt)}*/} hs</Text>
+        <Text size='xs'>{/*formatDate(createdAt)*/}</Text>
       </CardBody>
       <CardFooter alignItems="center">
-        <Text size='xs' mr="20px">Total: $1250{/*formatPrice(total)*/}</Text>
+        <Text size='xs' mr="20px">Total: {formatPrice(total)}</Text>
         <Button size='sm' colorScheme={colorPalette.chakraScheme.button}>Ver</Button>
       </CardFooter>
     </Card>

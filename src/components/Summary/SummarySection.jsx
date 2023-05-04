@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {LandingSection} from '../LandingSection/LandingSection.jsx';
 import { Heading, SimpleGrid, Box, Text } from '@chakra-ui/react';
 import { SummaryCardProduct } from '../SummaryCardProduct/SummaryCardProduct.jsx';
 import {Accordion,AccordionItem,AccordionButton,AccordionPanel,AccordionIcon} from '@chakra-ui/react';
 import {TableContainer, Tr, Td, Tbody, Tfoot, Table, Th, Thead} from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import * as ordersActions from '../../redux/actions/orders-actions.js'
+import { formatPrice } from '../../utils/general.js';
 
 export const SummarySection = () => {
+
+  const [visitedOrder, setVisitedOrder] = useState(null);
+  const currentUser = useSelector(state => state.user.currentUser);
+  const orders = useSelector(state => state.orders.orders);
+  const dispatch = useDispatch();
+  const {orderId} = useParams();
+
+
+
+  useEffect(()=>{
+    if(!orders){
+      dispatch(ordersActions.getFullOrders(currentUser?.id))
+    }
+    setVisitedOrder(orders?.find(order => order.id === orderId))
+  },[orderId, orders, dispatch, currentUser?.id])
+
   return (
     <>
       <LandingSection>
-        <Heading textAlign="center" size="md" mb="25px">Detalle del pedido #152634</Heading>
+        <Heading textAlign="center" size="md" mb="25px">Detalle del pedido #{visitedOrder?.id.slice(0,6)}</Heading>
         <Box w="full" maxW="800px">
           {/*Area de productos*/}
           <Accordion allowMultiple mb="25px">
@@ -22,10 +42,11 @@ export const SummarySection = () => {
               </Text>
               <AccordionPanel pb={4}>
                 <SimpleGrid w="full" spacing="2" columns="1">
-                  <SummaryCardProduct />
-                  <SummaryCardProduct />
-                  <SummaryCardProduct />
-                  <SummaryCardProduct />
+                  {
+                    visitedOrder?.items.map(item => (
+                      <SummaryCardProduct key={item.id} {...item} />
+                    ))
+                  }
                 </SimpleGrid>
               </AccordionPanel>
             </AccordionItem>
@@ -43,17 +64,17 @@ export const SummarySection = () => {
               <Tbody>
                 <Tr>
                   <Td>Subtotal</Td>
-                  <Td isNumeric>$25000</Td>
+                  <Td isNumeric>{formatPrice(visitedOrder?.subtotal)}</Td>
                 </Tr>
                 <Tr>
                   <Td>Envío</Td>
-                  <Td isNumeric>$300</Td>
+                  <Td isNumeric>{formatPrice(visitedOrder?.shippingCost)}</Td>
                 </Tr>
               </Tbody>
               <Tfoot>
                 <Tr>
                   <Th>Total</Th>
-                  <Th isNumeric>$25300</Th>
+                  <Th isNumeric>{formatPrice(visitedOrder?.total)}</Th>
                 </Tr>
               </Tfoot>
             </Table>

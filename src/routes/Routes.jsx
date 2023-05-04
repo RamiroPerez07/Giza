@@ -37,7 +37,8 @@ export const Routes = () => {
       <Route path='/restablecer-clave' element={<RecoverPassword />} />
       <Route path='/felicitaciones' element={<Congratulations />} />
       <Route path='/pedidos' element={<Orders />} />
-      <Route path='/resumen' element={<Summary />} />
+      <Route path='/pedidos/:orderId' element={<Summary />} />
+
     </ReactDomRoutes>
   )
 }

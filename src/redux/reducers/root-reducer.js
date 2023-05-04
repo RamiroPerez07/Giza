@@ -10,7 +10,7 @@ import { ordersReducer } from "./orders-reducer";
 const persistConfig = {
   key : "root",
   storage: storage,
-  whiteList : ["cart","filterPRoducts", "user", "orders"],
+  whiteList : ["cart","filterProducts", "user", "orders"],
 }
 
 export const rootReducer = combineReducers({

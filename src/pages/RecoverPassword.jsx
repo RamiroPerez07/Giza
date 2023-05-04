@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header } from '../components/Header/Header.jsx';
-import {RecoverPasswordSection} from '../components/RecoverPasswordSection/RecoverPasswordSection.jsx'
+import {RecoverPasswordSection} from '../components/RecoverPasswordSection/RecoverPasswordSection.jsx';
+import { Footer } from '../components/Footer/Footer.jsx';
 
 export const RecoverPassword = () => {
 
@@ -10,6 +11,7 @@ export const RecoverPassword = () => {
       <main>
         <RecoverPasswordSection />
       </main>
+      <Footer />
     </>
   )
 }

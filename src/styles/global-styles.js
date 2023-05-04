@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body{
     width: 100%;
+    min-height: 100vh;
     display: grid;
     align-items: start;
     justify-items: center;
@@ -17,7 +18,9 @@ export const GlobalStyle = createGlobalStyle`
 
   &#root{
     width: 100%;
+    min-height: 100vh;
     display: grid;
+    grid-auto-rows: 1fr auto;
     align-items: start;
     justify-items: center;
   }

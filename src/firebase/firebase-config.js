@@ -9,12 +9,12 @@ export const firebaseConfig = {
 };
 
 export const actionCodeSettingsVerification = {
-  url: process.env.NODE_ENV === "development" ? 'http://localhost:3000' : '',
+  url: process.env.NODE_ENV === "development" ? 'http://localhost:3000' : 'http://localhost:3000/ingresar',
 }
 
 export const actionCodeSettingsForgotPassword = {
   url: process.env.NODE_ENV === 'development'?
   'http://localhost:3000/ingresar' :
-  '/'
+  'http://localhost:3000/ingresar'
 }
 
