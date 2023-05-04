@@ -6,6 +6,7 @@ import * as orderActions from '../../redux/actions/orders-actions.js'
 import { OrderCard } from '../OrderCard/OrderCard.jsx';
 import { Spinner } from '@chakra-ui/react';
 import {Alert,AlertIcon,AlertTitle,AlertDescription} from '@chakra-ui/react'
+import { Breadcrum } from '../Breadcrum/Breadcrum.jsx';
 
 export const OrdersSection = () => {
 
@@ -25,10 +26,26 @@ export const OrdersSection = () => {
     </Alert>
   }
 
+  const sections = [
+    {
+      name: "Inicio",
+      page: "/",
+    },
+    {
+      name: "Productos",
+      page: "/productos",
+    },
+    {
+      name: "Pedidos",
+      page: "/pedidos",
+    },
+  ]
+
 
   return (
     <>
       <LandingSection>
+        <Breadcrum sections={sections} />
         <Box w="full" maxW="850px">
           <Heading size="md" m="15px 10px 25px 10px" textAlign="center">Mis pedidos</Heading>
           <SimpleGrid spacing={4} minChildWidth="250px" justifyItems="center" w="full">

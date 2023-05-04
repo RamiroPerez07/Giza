@@ -1,8 +1,9 @@
-export const formatDate = date =>
-  new Intl.DateTimeFormat('es-AR', {
+export const formatDate = date => {
+  console.log(date);
+  return new Intl.DateTimeFormat('es-AR', {
     dateStyle: 'medium',
     timeStyle: 'short',
-  }).format(date);
+  }).format(date);}
 
   export const formatPrice = price => {
     return new Intl.NumberFormat('es-AR', {

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import {CartProductCard} from '../CartProductCard/CartProductCard.jsx';
 import { calculateTotal } from '../../utils/subtotals.js';
 import { useNavigate } from 'react-router-dom';
+import { formatPrice } from '../../utils/general.js';
 
 export const CheckoutDetail = () => {
   //llamo al estado del carrito
@@ -32,14 +33,14 @@ export const CheckoutDetail = () => {
         <Divider />
         <SimpleGrid w="full" columns={2} p="10px 25px" gap="5px">
           <Text>Subtotal</Text>
-          <Text justifySelf="end" fontWeight="bold">$ {subtotal}</Text>
+          <Text justifySelf="end" fontWeight="bold">{formatPrice(subtotal)}</Text>
           <Text>Envío</Text>
-          <Text justifySelf="end" fontWeight="bold">$ {shippingCost}</Text>
+          <Text justifySelf="end" fontWeight="bold">{formatPrice(shippingCost)}</Text>
         </SimpleGrid>
         <Divider />
         <SimpleGrid w="full" columns={2} p="10px 25px">
           <Text>Total</Text>
-          <Text justifySelf="end" fontWeight="bold">$ {total}</Text>
+          <Text justifySelf="end" fontWeight="bold">{formatPrice(total)}</Text>
         </SimpleGrid>
       </Stack>
     </>

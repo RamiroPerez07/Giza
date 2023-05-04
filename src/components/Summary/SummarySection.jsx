@@ -5,9 +5,10 @@ import { SummaryCardProduct } from '../SummaryCardProduct/SummaryCardProduct.jsx
 import {Accordion,AccordionItem,AccordionButton,AccordionPanel,AccordionIcon} from '@chakra-ui/react';
 import {TableContainer, Tr, Td, Tbody, Tfoot, Table, Th, Thead} from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import * as ordersActions from '../../redux/actions/orders-actions.js'
 import { formatPrice } from '../../utils/general.js';
+import { Breadcrum } from '../Breadcrum/Breadcrum.jsx';
 
 export const SummarySection = () => {
 
@@ -16,6 +17,27 @@ export const SummarySection = () => {
   const orders = useSelector(state => state.orders.orders);
   const dispatch = useDispatch();
   const {orderId} = useParams();
+
+  const location = useLocation();
+
+  const sections = [
+    {
+      name: "Inicio",
+      page: "/",
+    },
+    {
+      name: "Productos",
+      page: "/productos",
+    },
+    {
+      name: "Pedidos",
+      page: "/pedidos",
+    },
+    {
+      name: "#"+visitedOrder?.id.slice(0,6),
+      page: location.pathname,
+    },
+  ]
 
 
 
@@ -29,6 +51,7 @@ export const SummarySection = () => {
   return (
     <>
       <LandingSection>
+        <Breadcrum sections={sections} />
         <Heading textAlign="center" size="md" mb="25px">Detalle del pedido #{visitedOrder?.id.slice(0,6)}</Heading>
         <Box w="full" maxW="800px">
           {/*Area de productos*/}
@@ -41,7 +64,7 @@ export const SummarySection = () => {
                 </AccordionButton>
               </Text>
               <AccordionPanel pb={4}>
-                <SimpleGrid w="full" spacing="2" columns="1">
+                <SimpleGrid w="full" spacing="2" columns="2" minChildWidth='350px' justifyItems="center">
                   {
                     visitedOrder?.items.map(item => (
                       <SummaryCardProduct key={item.id} {...item} />

@@ -9,6 +9,7 @@ import {addProductToCart} from '../../redux/actions/cart-actions.js';
 import { handleAddProductToCart } from '../../utils/cartEvents';
 import {MdLocalShipping} from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import { formatPrice } from '../../utils/general';
 
 export const ProductCard = (product) => {
   const {id, name, brand, shortDescription, description, price, stock, imgUrl, freeShipping} = product;
@@ -38,7 +39,7 @@ export const ProductCard = (product) => {
               </>
               }
             </Stack>
-            <Text color={useColorModeValue(colorPalette.light.terciary,colorPalette.dark.terciary)} fontSize='2xl' fontWeight="500">$ {price}</Text>
+            <Text color={useColorModeValue(colorPalette.light.terciary,colorPalette.dark.terciary)} fontSize='2xl' fontWeight="500">{formatPrice(price)}</Text>
           </Stack>
         </StyledCardBody>
         <Divider />

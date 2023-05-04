@@ -8,6 +8,7 @@ import {colorPalette} from '../../styles/colors.js';
 import { MdLocalShipping } from 'react-icons/md';
 import { handleAddProductToCart } from '../../utils/cartEvents.js';
 import { addProductToCart } from '../../redux/actions/cart-actions.js';
+import { formatPrice } from '../../utils/general.js';
 
 export const ProductDetail = () => {
 
@@ -71,7 +72,7 @@ export const ProductDetail = () => {
             </>
             }
           </Stack>
-          <Text fontSize="x-large" fontWeight="bold">$ {price}</Text>
+          <Text fontSize="x-large" fontWeight="bold">{formatPrice(price)}</Text>
           <Button colorScheme={colorPalette.chakraScheme.button} alignSelf="center" onClick={()=>handleAddProductToCart(currentProduct, toast, dispatch, addProductToCart)}>Agregar al carrito</Button>
         </Stack>
       </LandingSection>
