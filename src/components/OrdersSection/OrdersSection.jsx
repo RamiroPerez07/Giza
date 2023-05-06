@@ -7,14 +7,12 @@ import { OrderCard } from '../OrderCard/OrderCard.jsx';
 import { Spinner } from '@chakra-ui/react';
 import {Alert,AlertIcon,AlertTitle,AlertDescription} from '@chakra-ui/react'
 import { Breadcrum } from '../Breadcrum/Breadcrum.jsx';
-import { useRedirect } from '../../hooks/useRedirect.js';
 
 export const OrdersSection = () => {
 
   const currentUser = useSelector(state => state.user.currentUser);
   const {orders, error, loading} = useSelector(state => state.orders);
   const dispatch = useDispatch();
-  useRedirect("/ingresar");
 
   useEffect(() => {
     if(currentUser){
