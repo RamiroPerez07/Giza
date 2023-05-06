@@ -25,28 +25,28 @@ export const ProductCard = (product) => {
 
   return (
     <>
-      <Card maxW="300px">
-        <StyledCardBody>
-          <Image src={imgUrl} alt='Imagen del producto' borderRadius='lg' w="120px" h="120px" objectFit="contain" />
-          <Stack mt='6' spacing='3'>
-            <Heading size='md'>{name}</Heading>
-            <Text minH="48px">{shortDescription}</Text>
+      <Card maxW="280px">
+        <StyledCardBody >
+          <Image src={imgUrl} alt='Imagen del producto' borderRadius='lg' boxSize="100px" objectFit="contain" />
+          <Stack mt='6' spacing='2'>
+            <Heading fontSize={{base:"xs",sm:"sm"}}>{name}</Heading>
+            <Text minH="48px" fontSize={{base:"xs",sm:"sm"}}>{shortDescription}</Text>
             <Stack direction="row" minH="20px">
               {product.freeShipping && 
               <>
                 <MdLocalShipping color={colorPalette.chakraScheme.green} />
-                <Text color={colorPalette.chakraScheme.green} fontSize="small" fontWeight="bold">Envío gratuito</Text>
+                <Text color={colorPalette.chakraScheme.green} fontSize={{base:"xs",sm:"sm"}} fontWeight="bold">Envío gratuito</Text>
               </>
               }
             </Stack>
-            <Text color={useColorModeValue(colorPalette.light.terciary,colorPalette.dark.terciary)} fontSize='2xl' fontWeight="500">{formatPrice(price)}</Text>
+            <Text color={useColorModeValue(colorPalette.light.terciary,colorPalette.dark.terciary)} fontSize={{base:"xs",sm:"sm"}} fontWeight="500">{formatPrice(price)}</Text>
           </Stack>
         </StyledCardBody>
         <Divider />
         <CardFooter display="grid" justifyItems="center">
           <ButtonGroup spacing='2'>
-            <Button onClick={()=>handleAddProductToCart(product, toast, dispatch, addProductToCart)} leftIcon={<BsFillCartFill />} variant='solid' colorScheme={colorPalette.chakraScheme.button}>Agregar</Button>
-            <Button variant='ghost' colorScheme={colorPalette.chakraScheme.button} onClick={()=>navigate(`${product.name}`,{state:{id:product.id}})}>Mas info</Button>
+            <Button size="sm" onClick={()=>handleAddProductToCart(product, toast, dispatch, addProductToCart)} leftIcon={<BsFillCartFill />} variant='solid' colorScheme={colorPalette.chakraScheme.button}>Agregar</Button>
+            <Button size="sm" variant='ghost' colorScheme={colorPalette.chakraScheme.button} onClick={()=>navigate(`${product.name}`,{state:{id:product.id}})}>Mas info</Button>
           </ButtonGroup>
         </CardFooter>
       </Card>

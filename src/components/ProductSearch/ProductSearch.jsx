@@ -50,15 +50,16 @@ export const ProductSearch = () => {
   return (
     <Box w="95%" maxW="500px" mb="25px">
       <Stack as="form" direction="row" spacing={3} onSubmit={handleFilter}>
-        <InputGroup>
+        <InputGroup >
           <InputLeftElement
+            size={{base:"sm", sm:"sm"}}
             pointerEvents='none'
             children={<SearchIcon aria-label="Buscar producto" />}
             color={colorPalette.chakraScheme.button}
           />
-          <Input onChange={(event)=> setFilterParameters(event)} type='text' placeholder='Buscar producto' focusBorderColor={colorPalette.light.terciary} ref={finalRef} />
+          <Input onChange={(event)=> setFilterParameters(event)} type='text' placeholder='Buscar' focusBorderColor={colorPalette.light.terciary} ref={finalRef} />
         </InputGroup>
-        <Button leftIcon={<FaFilter style={filterActive?fillFilterStyle:emptyFilterStyle} />} variant='outline' onClick={onFilterFrameOpen}>Filtro</Button>
+        <Button leftIcon={<FaFilter style={filterActive?fillFilterStyle:emptyFilterStyle} />} variant='outline' onClick={onFilterFrameOpen} >Filtro</Button>
         <IconButton aria-label='Ordenar según' icon={<AiOutlineSortAscending style={sortActive?fillFilterStyle:emptyFilterStyle} />} variant="outline" fontSize="x-large" onClick={OnSortFrameOpen} />
       </Stack>
       <FilterProduct isOpen={isFilterFrameOpen} onClose={OnFilterFrameClose} initialRef={initialRef} finalRef={finalRef} />

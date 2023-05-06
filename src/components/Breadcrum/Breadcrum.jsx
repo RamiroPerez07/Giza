@@ -7,11 +7,11 @@ export const Breadcrum = (props) => {
   const {sections} = props;
   return (
     <>
-      <Breadcrumb justifySelf="start" m="20px" spacing='8px' separator={<ChevronRightIcon color='gray.500' />}>
+      <Breadcrumb justifySelf="start" ml="20px" my="20px" spacing='8px' fontSize={{base:"xs", sm:"sm"}} separator={<ChevronRightIcon color='gray.500' />}>
         {sections?.map(section => {
           return (
             <BreadcrumbItem key={section.name}>
-              <BreadcrumbLink as={Link} to={section.page} state={section.state||{}} fontSize="sm" >{section.name}</BreadcrumbLink>
+              <BreadcrumbLink as={Link} to={section.page} state={section.state||{}} fontSize={{base:"xs", sm:"sm"}} >{section.name}</BreadcrumbLink>
             </BreadcrumbItem>
           )
         })}

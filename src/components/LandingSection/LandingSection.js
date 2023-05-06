@@ -6,7 +6,7 @@ export const StyledLandingSection = styled(Box)`
   max-width: 1300px;
   display: grid;
   justify-items: center;
-  padding: 10px;
+  padding: 10px 10px 35px 10px;
   min-height: calc(min(1020px, 100vh) - 80px);
   grid-auto-rows: min-content;
 `;

@@ -55,7 +55,7 @@ export const SummarySection = () => {
         <Heading textAlign="center" size="md" mb="25px">Detalle del pedido #{visitedOrder?.id.slice(0,6)}</Heading>
         <Box w="full" maxW="800px">
           {/*Area de productos*/}
-          <Accordion allowMultiple mb="25px">
+          <Accordion allowMultiple mb="25px" w="full">
             <AccordionItem>
               <Text>
                 <AccordionButton>
@@ -64,7 +64,7 @@ export const SummarySection = () => {
                 </AccordionButton>
               </Text>
               <AccordionPanel pb={4}>
-                <SimpleGrid w="full" spacing="2" columns="2" minChildWidth='350px' justifyItems="center">
+                <SimpleGrid w="full" spacing="2" columns="2" minChildWidth={{base:"250px",sm:'350px'}} justifyItems="center">
                   {
                     visitedOrder?.items.map(item => (
                       <SummaryCardProduct key={item.id} {...item} />
@@ -76,7 +76,7 @@ export const SummarySection = () => {
           </Accordion>
 
           {/* Area costos */}
-          <TableContainer>
+          <TableContainer w="full">
             <Table size='sm'>
               <Thead>
                 <Tr>

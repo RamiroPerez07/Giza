@@ -21,7 +21,7 @@ export const ContactSection = () => {
     <>  
       <LandingSection>
         <Breadcrum sections={sections} />
-        <StyledContactContainer columns={2} spacing="25px" minChildWidth="300px">
+        <StyledContactContainer columns={2} spacing="25px" minChildWidth="250px">
           <ContactForm />
           <Map />
         </StyledContactContainer>

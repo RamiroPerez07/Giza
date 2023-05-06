@@ -21,7 +21,7 @@ export const StyledImg = styled(Image)`
 export const StyledMenuOptions = styled(Box)`
   display: grid;
   grid-auto-flow: column;
-  gap: 25px;
+  gap: 15px;
   align-items: center;
   justify-items: center;
 `;
