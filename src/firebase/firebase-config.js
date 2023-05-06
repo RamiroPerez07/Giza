@@ -9,12 +9,12 @@ export const firebaseConfig = {
 };
 
 export const actionCodeSettingsVerification = {
-  url: process.env.NODE_ENV === "development" ? 'http://localhost:3000' : 'http://localhost:3000/ingresar',
+  url: process.env.NODE_ENV === "development" ? 'http://localhost:3000' : 'https://giza-d1d7d.web.app/ingresar',
 }
 
 export const actionCodeSettingsForgotPassword = {
   url: process.env.NODE_ENV === 'development'?
   'http://localhost:3000/ingresar' :
-  'http://localhost:3000/ingresar'
+  'https://giza-d1d7d.web.app/ingresar'
 }
 
