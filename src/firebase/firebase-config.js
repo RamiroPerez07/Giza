@@ -9,11 +9,11 @@ export const firebaseConfig = {
 };
 
 export const actionCodeSettingsVerification = {
-  url: process.env.NODE_ENV === "development" ? 'https://giza-d1d7d.web.app/ingresar' : 'https://giza-d1d7d.web.app/ingresar',
+  url: process.env.NODE_ENV === "production" ? 'https://giza-d1d7d.web.app/ingresar' : 'https://giza-d1d7d.web.app/ingresar',
 }
 
 export const actionCodeSettingsForgotPassword = {
-  url: process.env.NODE_ENV === 'development'?
+  url: process.env.NODE_ENV === 'production'?
   'https://giza-d1d7d.web.app/ingresar' :
   'https://giza-d1d7d.web.app/ingresar'
 }
