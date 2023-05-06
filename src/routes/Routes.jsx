@@ -35,9 +35,22 @@ export const Routes = () => {
       <Route path='/ingresar' element={<Login />} />
       <Route path='/registro' element={<SignUp />} />
       <Route path='/restablecer-clave' element={<RecoverPassword />} />
-      <Route path='/felicitaciones' element={<Congratulations />} />
-      <Route path='/pedidos' element={<Orders />} />
-      <Route path='/pedidos/:orderId' element={<Summary />} />
+      <Route path='/felicitaciones' element={
+        <ProtectedRoute redirectTo={"/ingresar"}>
+          <Congratulations />
+        </ProtectedRoute>
+      } />
+      <Route path='/pedidos' element={
+        <ProtectedRoute redirectTo={"/ingresar"}>
+          <Orders />
+        </ProtectedRoute>
+      } 
+      />
+      <Route path='/pedidos/:orderId' element={
+        <ProtectedRoute redirectTo={"/ingresar"}>
+          <Summary />
+        </ProtectedRoute>
+      } />
 
     </ReactDomRoutes>
   )

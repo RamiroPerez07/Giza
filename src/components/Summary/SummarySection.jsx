@@ -9,6 +9,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import * as ordersActions from '../../redux/actions/orders-actions.js'
 import { formatPrice } from '../../utils/general.js';
 import { Breadcrum } from '../Breadcrum/Breadcrum.jsx';
+import { useRedirect } from '../../hooks/useRedirect.js';
 
 export const SummarySection = () => {
 
@@ -17,6 +18,7 @@ export const SummarySection = () => {
   const orders = useSelector(state => state.orders.orders);
   const dispatch = useDispatch();
   const {orderId} = useParams();
+  useRedirect("/ingresar");
 
   const location = useLocation();
 

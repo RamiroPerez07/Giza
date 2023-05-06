@@ -8,6 +8,7 @@ import { Spinner } from '@chakra-ui/react';
 import {Alert,AlertIcon,AlertTitle,AlertDescription} from '@chakra-ui/react'
 import { Breadcrum } from '../Breadcrum/Breadcrum.jsx';
 import { current } from '@reduxjs/toolkit';
+import { useRedirect } from '../../hooks/useRedirect.js';
 
 export const OrdersSection = () => {
 
@@ -49,6 +50,8 @@ export const OrdersSection = () => {
       page: "/pedidos",
     },
   ]
+
+  useRedirect("/ingresar")
 
 
   return (
