@@ -36,7 +36,7 @@ export const LoginForm = () => {
                 {({ field, form }) => (
                   <FormControl isInvalid={form.errors.email && form.touched.email}>
                     <FormLabel>Email</FormLabel>
-                    <Input {...field} type="email" placeholder='Nombre de usuario' focusBorderColor={colorPalette.light.terciary} />
+                    <Input {...field} type="email" placeholder='Email de usuario' focusBorderColor={colorPalette.light.terciary} />
                     <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                   </FormControl>
                 )}
