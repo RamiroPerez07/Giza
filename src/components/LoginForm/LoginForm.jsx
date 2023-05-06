@@ -21,7 +21,7 @@ export const LoginForm = () => {
               const {user} = signInUser(values.email, values.password);
               createUserProfileDocument(user);
             } catch (error) {
-              alert(error)
+              console.log(error)
             }
             //setTimeout(() => {
             //  alert(JSON.stringify(values, null, 2))
