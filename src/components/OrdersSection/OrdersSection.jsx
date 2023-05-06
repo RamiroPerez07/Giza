@@ -15,6 +15,7 @@ export const OrdersSection = () => {
   const currentUser = useSelector(state => state.user.currentUser);
   const {orders, error, loading} = useSelector(state => state.orders);
   const dispatch = useDispatch();
+  useRedirect("/ingresar");
 
   useEffect(() => {
     if(currentUser){
@@ -50,8 +51,6 @@ export const OrdersSection = () => {
       page: "/pedidos",
     },
   ]
-
-  useRedirect("/ingresar")
 
 
   return (
